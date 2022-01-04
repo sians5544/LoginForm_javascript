@@ -21,6 +21,9 @@
     "eslint-plugin-html": "^6.2.0",
     "eslint-plugin-import": "^2.25.4",
     "prettier": "2.5.1",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sass": "^1.43.4",
+    "sass-lint": "^1.13.1",
+    "scss-reset": "^1.2.2"
   }
 }
