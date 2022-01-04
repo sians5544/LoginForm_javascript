@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>마이페이지 페이지</title>
+  <!-- <link rel="stylesheet" href="./css/index.css" /> -->
+  <link rel="stylesheet" href="./css/index.css" />
+</head>
+
+<body class="mypage-body">
+  <header>
+    <h1>
+      <!-- <a href="./index.html"><img src="assets/logo.svg" alt="zerobase" /></a> -->
+    </h1>
+  </header>
+  <main>
+    <section>
+      <form class="mypage-form">
+        <fieldset>
+          <legend class="sr-only">마이페이지 수정</legend>
+          <h2 class="mypage-title">마이페이지 수정</h2>
+          <div class="mypage-form-info mypage-form-email">
+            <input id="email" minlength="100" type="email" class="mypage-form-input" disabled />
+            <label for="email" class="mypage-form-label email">이메일</label>
+          </div>
+          <div class="mypage-form-info mypage-form-name">
+            <input id="name" minlength="100" type="text" class="mypage-form-input" />
+            <label for="name" class="mypage-form-label name">이름</label>
+          </div>
+          <div class="mypage-form-info mypage-form-phone">
+            <input id="phone" minlength="100" type="phone" class="mypage-form-input" />
+            <label for="phone" class="mypage-form-label phone">휴대전화</label>
+          </div>
+          <div class="mypage-form-info mypage-form-password">
+            <input id="password" minlength="100" type="password" class="mypage-form-input" />
+            <label for="password" class="mypage-form-label password">비밀번호</label>
+          </div>
+          <div class="mypage-form-info mypage-form-password">
+            <input id="confirm-password" minlength="100" type="password" class="mypage-form-input" />
+            <label for="confirm-password" class="mypage-form-label confirm-password">비밀번호 확인</label>
+          </div>
+
+          <!-- 회원가입 버튼 -->
+          <div>
+            <button type="submit" class="mypage-form-button complete-button">수정 완료</button>
+            <button type="submit" class="mypage-form-button withdraw-button">회원 탈퇴</button>
+          </div>
+          <a href="./index.html" class="mypage-form-back">뒤로가기</a>
+        </fieldset>
+      </form>
+    </section>
+  </main>
+</body>
+
+</html>
