@@ -37,7 +37,9 @@ const auth = (() => {
 // email validate
 const emailValidate = (expression, index, button) => {
   const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
+  if (!regEmail.test(expression)) {
+    document.querySelector('.signin-form-info label').style.top = '0';
+  }
   auth.checkIsCorrectForm(!regEmail.test(expression), index, '이메일 형식에 맞게 입력해 주세요.', button);
 };
 
@@ -63,3 +65,48 @@ document.querySelector('.signin-form').oninput = e => {
     passwordValidate(e.target.value, 1, $loginButton);
   }
 };
+
+const $autoLogin = document.querySelector('#auto__login');
+const $formButton = document.querySelector('.form-button');
+const $emailInput = document.querySelector('#email');
+const $passwordInput = document.querySelector('#password');
+
+let checked = false;
+
+const searchId = async email => {
+  try {
+    const { data: user } = await axios.get('/users/email/sian@naver.com');
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+$autoLogin.onchange = () => {
+  checked = !checked;
+  searchId(document.querySelector('#email').value);
+};
+
+$formButton.onclick = async event => {
+  // event.preventDefault();
+  try {
+    console.log('들어옴');
+    const { data: user } = await axios.post('/users/signin', {
+      email: $emailInput.value,
+      password: $passwordInput.value,
+    });
+
+    console.log(user);
+    // if (checked && user) {
+    //   console.log('로그인 성공');
+    // }
+    if (user) {
+      if (checked) localStorage.setItem('auth', user.id);
+      else sessionStorage.setItem('auth', user.id);
+    } else {
+      event.preventDefault();
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+// 입력된 email 로 아이디 값을 가져오기

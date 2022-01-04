@@ -13,8 +13,8 @@
       integrity="sha384-ekOryaXPbeCpWQNxMwSWVvQ0+1VrStoPJq54shlYhR8HzQgig1v5fas6YgOqLoKz"
       crossorigin="anonymous"
     />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script defer src="js/signin.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   </head>
 
   <body class="body">
@@ -25,7 +25,7 @@
     </header>
     <main>
       <section>
-        <form class="signin-form">
+        <form class="signin-form" action="./mypage.html" method="get">
           <fieldset>
             <legend class="sr-only">로그인 폼</legend>
             <div class="signin-form-info signin-form-email">
@@ -37,7 +37,7 @@
             </div>
             <!-- 비밀번호 입력칸 -->
             <div class="signin-form-info signin-form-password">
-              <input id="password" minlength="100" type="password" class="signin-form-input" />
+              <input id="password" type="password" class="signin-form-input" />
               <label for="password" class="signin-form-label">비밀번호</label>
               <span class="bar"></span>
               <i class="icon icon-success bx bxs-check-circle hidden"></i>
