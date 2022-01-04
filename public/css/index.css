@@ -317,14 +317,6 @@ html.is-active {
   opacity: 1;
 }
 
-.edit-profile-button {
-  background-color: rgb(70, 121, 178);
-}
-
-.edit-profile-button:hover {
-  border: 1px solid rgb(70, 121, 178);
-}
-
 .signin-form-more {
   margin-top: 32px;
   text-align: center;
@@ -497,13 +489,6 @@ html.is-active {
   margin-bottom: 0.4375rem;
 }
 
-.complete-button {
-  background-color: rgb(70, 121, 178);
-}
-
-.withdraw-button {
-  background-color: rgb(225, 94, 85);
-}
 
 .form-back {
   margin-top: 1.875rem;
@@ -575,4 +560,19 @@ html.is-active {
   background-color: transparent;
   border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.2);
+}
+
+.complete-button, .edit-profile-button {
+  background-color: rgb(70, 121, 178);
+}
+
+.withdraw-button {
+  background-color: rgb(225, 94, 85);
+}
+.edit-profile-button {
+  background-color: rgb(70, 121, 178);
+}
+
+.edit-profile-button:hover {
+  border: 1px solid rgb(70, 121, 178);
 }
