@@ -47,23 +47,21 @@ app.get('/users/:id', (req, res) => {
 });
 
 // 이메일 중복확인
-app.get('/users/:email', (req, res) => {
+app.get('/users/email/:email', (req, res) => {
   const { email } = req.params;
   const user = users.find(user => user.email === email);
-
   res.send(user);
 });
 
 // 로그인
-app.post('/users', (req, res) => {
+app.post('/users/signin', (req, res) => {
   const payload = req.body;
   const user = users.find(user => user.email === payload.email && payload.password === user.password);
-
-  res.send(user.id);
+  res.send(user);
 });
 
 // 회원가입
-app.post('/users', (req, res) => {
+app.post('/users/signup', (req, res) => {
   users = [req.body, ...users];
   res.send(users);
 });
