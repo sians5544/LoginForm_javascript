@@ -177,7 +177,6 @@ html.is-active {
   overflow-y: hidden;
 }
 
-
 .body header {
   text-align: center;
   padding-top: 3rem;
@@ -241,7 +240,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:focus+label {
+.signin-form-info input:focus + label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -253,7 +252,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:invalid+label {
+.signin-form-info input:invalid + label {
   top: 10%;
 }
 
@@ -323,33 +322,39 @@ html.is-active {
   padding: 0.5rem;
 }
 
-.signup-body header, .mypage-body header {
+.signup-body header,
+.mypage-body header {
   text-align: center;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
-.signup-body a, .mypage-body a {
+.signup-body a,
+.mypage-body a {
   display: block;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
 }
 
-.signup-form, .mypage-form {
+.signup-form,
+.mypage-form {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 3rem;
   width: 20.9375rem;
 }
 @media (max-width: 710px) {
-  .signup-form, .mypage-form {
+  .signup-form,
+  .mypage-form {
     width: 100%;
     max-width: 20.9375rem;
   }
 }
-.signup-form-label, .mypage-form-label {
+.signup-form-label,
+.mypage-form-label {
   position: absolute;
 }
-.signup-form-info, .mypage-form-info {
+.signup-form-info,
+.mypage-form-info {
   width: 20.9375rem;
   height: 3.675rem;
   margin-bottom: 1rem;
@@ -357,43 +362,51 @@ html.is-active {
   position: relative;
 }
 @media (max-width: 710px) {
-  .signup-form-info, .mypage-form-info {
+  .signup-form-info,
+  .mypage-form-info {
     width: 100%;
     max-width: 20.9375rem;
   }
 }
-.signup-form-info input, .mypage-form-info input {
+.signup-form-info input,
+.mypage-form-info input {
   flex-grow: 1;
   padding-top: 0.8125rem;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #a0a0a0;
 }
-.signup-form-info input:focus, .mypage-form-info input:focus {
+.signup-form-info input:focus,
+.mypage-form-info input:focus {
   outline: none;
   border-bottom: 1px solid blue;
 }
-.signup-form-info input:focus + label, .mypage-form-info input:focus + label {
+.signup-form-info input:focus + label,
+.mypage-form-info input:focus + label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
   line-height: 1.125rem;
 }
-.signup-form-info input:invalid, .mypage-form-info input:invalid {
+.signup-form-info input:invalid,
+.mypage-form-info input:invalid {
   outline: none;
   border-bottom: 1px solid blue;
 }
-.signup-form-info input:invalid + label, .mypage-form-info input:invalid + label {
+.signup-form-info input:invalid + label,
+.mypage-form-info input:invalid + label {
   top: 10%;
 }
-.signup-form-info label, .mypage-form-info label {
+.signup-form-info label,
+.mypage-form-info label {
   transition: all 0.2s ease-in-out;
   font-size: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
   color: #a0a0a0;
 }
-.signup-form-email-button, .mypage-form-email-button {
+.signup-form-email-button,
+.mypage-form-email-button {
   position: absolute;
   height: 1.75rem;
   right: 0;
@@ -410,33 +423,39 @@ html.is-active {
   letter-spacing: -0.01875rem;
   line-height: 1.125rem;
 }
-.signup-form-check, .mypage-form-check {
+.signup-form-check,
+.mypage-form-check {
   margin-top: 3rem;
   margin-bottom: 1.125rem;
 }
-.signup-form-check h2, .mypage-form-check h2 {
+.signup-form-check h2,
+.mypage-form-check h2 {
   margin-bottom: 1rem;
   font-size: 0.875rem;
   letter-spacing: -0.01875rem;
   line-height: 1.3125rem;
 }
-.signup-form-check li, .mypage-form-check li {
+.signup-form-check li,
+.mypage-form-check li {
   display: flex;
   padding-left: 0.75rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
-.signup-form-check li input, .mypage-form-check li input {
+.signup-form-check li input,
+.mypage-form-check li input {
   width: 1.0625rem;
   height: 1.0625rem;
 }
-.signup-form-check li label, .mypage-form-check li label {
+.signup-form-check li label,
+.mypage-form-check li label {
   font-size: 0.875rem;
   letter-spacing: -0.01875rem;
   line-height: 1.3125rem;
   margin-left: 0.5rem;
 }
-.signup-form-check li:nth-child(1), .mypage-form-check li:nth-child(1) {
+.signup-form-check li:nth-child(1),
+.mypage-form-check li:nth-child(1) {
   padding-top: 0.9375rem;
   padding-bottom: 0.9375rem;
   border-bottom: 1px solid #a0a0a0;
@@ -466,10 +485,10 @@ html.is-active {
   color: rgb(80, 80, 80);
 }
 
-.signup-form-check h2, .mypage-form-check h2 {
+.signup-form-check h2,
+.mypage-form-check h2 {
   color: #6c6c6c;
 }
-
 
 .header-logo {
   display: flex;
@@ -480,3 +499,43 @@ html.is-active {
   width: 48px;
 }
 
+.signin-form .icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 1rem;
+  right: 0.4rem;
+  font-size: 1.4rem;
+  pointer-events: none;
+}
+.signin-form .icon.icon-success {
+  color: #2196f3;
+  /* color: var(--green); */
+}
+
+.signin-form .icon.icon-error {
+  color: #ed2553;
+}
+
+.signin-form .error {
+  position: absolute;
+  top: 120%;
+  left: 0.4rem;
+  font-size: 0.8rem;
+  color: #ed2553;
+}
+.hidden {
+  display: none !important;
+}
+.form-button {
+  border: 3px solid transparent;
+  background-color: #2196f3;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.form-button:disabled {
+  background-color: transparent;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.2);
+}
