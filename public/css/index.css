@@ -198,17 +198,17 @@ html.is-active {
   text-align: center;
 }
 @media (max-width: 960px) {
-  .header-members__login, .header-members__signup {
+  .header-members__login, .header-members__mypage {
     display: inline-block;
     width: 100%;
   }
   .header .login,
-.header .signup {
+.header .mypage {
     width: 50%;
     text-align: center;
   }
   .header .login img,
-.header .signup img {
+.header .mypage img {
     display: none;
   }
   .header .login {
@@ -354,7 +354,7 @@ html.is-active {
     margin: 0;
   }
   .header .login img,
-.header .signup img {
+.header .mypage img {
     display: inline;
     transform: translateY(0.3125rem);
   }
@@ -1421,33 +1421,33 @@ figcaption {
   padding: 0.5rem;
 }
 
-.signup-body header {
+.mypage-body header {
   text-align: center;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
-.signup-body a {
+.mypage-body a {
   display: block;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
 }
 
-.signup-form {
+.mypage-form {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 3rem;
   width: 20.9375rem;
 }
 @media (max-width: 710px) {
-  .signup-form {
+  .mypage-form {
     width: 100%;
     max-width: 20.9375rem;
   }
 }
-.signup-form-label {
+.mypage-form-label {
   position: absolute;
 }
-.signup-form-info {
+.mypage-form-info {
   width: 20.9375rem;
   height: 3.675rem;
   margin-bottom: 1rem;
@@ -1455,43 +1455,43 @@ figcaption {
   position: relative;
 }
 @media (max-width: 710px) {
-  .signup-form-info {
+  .mypage-form-info {
     width: 100%;
     max-width: 20.9375rem;
   }
 }
-.signup-form-info input {
+.mypage-form-info input {
   flex-grow: 1;
   padding-top: 0.8125rem;
   border: none;
   background-color: transparent;
   border-bottom: 1px solid #a0a0a0;
 }
-.signup-form-info input:focus {
+.mypage-form-info input:focus {
   outline: none;
   border-bottom: 1px solid blue;
 }
-.signup-form-info input:focus + label {
+.mypage-form-info input:focus + label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
   line-height: 1.125rem;
 }
-.signup-form-info input:invalid {
+.mypage-form-info input:invalid {
   outline: none;
   border-bottom: 1px solid blue;
 }
-.signup-form-info input:invalid + label {
+.mypage-form-info input:invalid + label {
   top: 10%;
 }
-.signup-form-info label {
+.mypage-form-info label {
   transition: all 0.2s ease-in-out;
   font-size: 0.875rem;
   top: 50%;
   transform: translateY(-50%);
   color: #a0a0a0;
 }
-.signup-form-email-button {
+.mypage-form-email-button {
   position: absolute;
   height: 1.75rem;
   right: 0;
@@ -1508,39 +1508,39 @@ figcaption {
   letter-spacing: -0.01875rem;
   line-height: 1.125rem;
 }
-.signup-form-check {
+.mypage-form-check {
   margin-top: 3rem;
   margin-bottom: 1.125rem;
 }
-.signup-form-check h2 {
+.mypage-form-check h2 {
   margin-bottom: 1rem;
   font-size: 0.875rem;
   letter-spacing: -0.01875rem;
   line-height: 1.3125rem;
 }
-.signup-form-check li {
+.mypage-form-check li {
   display: flex;
   padding-left: 0.75rem;
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
 }
-.signup-form-check li input {
+.mypage-form-check li input {
   width: 1.0625rem;
   height: 1.0625rem;
 }
-.signup-form-check li label {
+.mypage-form-check li label {
   font-size: 0.875rem;
   letter-spacing: -0.01875rem;
   line-height: 1.3125rem;
   margin-left: 0.5rem;
 }
-.signup-form-check li:nth-child(1) {
+.mypage-form-check li:nth-child(1) {
   padding-top: 0.9375rem;
   padding-bottom: 0.9375rem;
   border-bottom: 1px solid #a0a0a0;
   margin-bottom: 0.4375rem;
 }
-.signup-form-button {
+.mypage-form-button {
   margin-top: 1.875rem;
   margin-bottom: 1.875rem;
   padding-top: 0.5rem;
@@ -1558,14 +1558,14 @@ figcaption {
   border-radius: 0.625rem;
   line-height: 1.875rem;
 }
-.signup-form-back {
+.mypage-form-back {
   text-align: center;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
   line-height: 1.125rem;
   color: #101010;
 }
-.signup-form-check h2 {
+.mypage-form-check h2 {
   color: #6c6c6c;
 }
 
