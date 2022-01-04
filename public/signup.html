@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>회원가입 페이지</title>
+    <link rel="stylesheet" href="./style/index.css" />
+  </head>
+
+  <body class="signup-body">
+    <header>
+      <h1>
+        <a href="./index.html"><img src="assets/logo.svg" alt="zerobase" /></a>
+      </h1>
+    </header>
+    <main>
+      <section>
+        <form class="signup-form">
+          <fieldset>
+            <legend class="sr-only">회원가입 폼</legend>
+            <h2 class="sr-only">인적사항</h2>
+            <div class="signup-form-info signup-form-name">
+              <input id="name" minlength="100" type="text" class="signup-form-input" />
+              <label for="name" class="signup-form-label name">이름</label>
+            </div>
+            <div class="signup-form-info signup-form-email">
+              <input id="email" minlength="100" type="email" class="signup-form-input" />
+              <label for="email" class="signup-form-label email">이메일</label>
+              <button type="button" class="signup-form-email-button">인증메일 전송</button>
+            </div>
+            <div class="signup-form-info signup-form-phone">
+              <input id="phone" minlength="100" type="phone" class="signup-form-input" />
+              <label for="phone" class="signup-form-label phone">휴대전화</label>
+            </div>
+            <div class="signup-form-info signup-form-password">
+              <input id="password" minlength="100" type="password" class="signup-form-input" />
+              <label for="password" class="signup-form-label password">비밀번호</label>
+            </div>
+            <div class="signup-form-info signup-form-password">
+              <input id="confirm-password" minlength="100" type="password" class="signup-form-input" />
+              <label for="confirm-password" class="signup-form-label confirm-password">비밀번호 확인</label>
+            </div>
+            <!-- 서비스 정책 -->
+
+            <div class="signup-form-check">
+              <h2>서비스정책</h2>
+              <ul>
+                <li>
+                  <input type="checkbox" id="service-agree" />
+                  <label for="service-agree">전체 동의</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="service-age" />
+                  <label for="service-age">만 14세 이상입니다. (필수)</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="service-use" />
+                  <label for="service-use">서비스 이용약관 동의 (필수)</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="service-privacy" />
+                  <label for="service-privacy">개인정보 수집 및 이용 동의 (필수)</label>
+                </li>
+                <li>
+                  <input type="checkbox" id="service-sns" />
+                  <label for="service-sns">마케팅 수신 동의 (선택)</label>
+                </li>
+              </ul>
+            </div>
+            <!-- 회원가입 버튼 -->
+            <div>
+              <button type="submit" class="signup-form-button">회원가입</button>
+            </div>
+            <a href="./index.html" class="signup-form-back">뒤로가기</a>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>

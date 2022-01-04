@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>로그인 페이지</title>
+    <link rel="stylesheet" href="./style/index.css" />
+  </head>
+
+  <body class="body">
+    <header>
+      <h1 class="header-logo">
+        <a href="./index.html"><img src="./assets/logo.svg" alt="제로베이스" /></a>
+      </h1>
+    </header>
+    <main>
+      <section>
+        <form class="signin-form">
+          <fieldset>
+            <legend class="sr-only">로그인 폼</legend>
+            <div class="signin-form-info signin-form-email">
+              <input id="email" type="email" class="signin-form-input" />
+              <label for="email" class="signin-form-label">이메일</label>
+            </div>
+            <!-- 비밀번호 입력칸 -->
+            <div class="signin-form-info signin-form-password">
+              <input id="password" minlength="100" type="password" class="signin-form-input" />
+              <label for="password" class="signin-form-label">비밀번호</label>
+            </div>
+            <!-- 자동로그인 / 계정찾기 -->
+            <div class="signin-form-auto-find">
+              <div class="auto-login">
+                <input type="checkbox" id="auto__login" name="login" />
+                <label for="auto__login">자동 로그인</label>
+              </div>
+              <!-- 체크박스 입력시 나올 문구 -->
+              <a href="#"><span>비밀번호 찾기</span></a>
+            </div>
+            <!-- 로그인 버튼 -->
+            <div>
+              <button type="submit" class="signin-form-button">로그인</button>
+            </div>
+            <p class="signin-form-more">
+              제로베이스가 처음이신가요?
+              <a href="./signup.html">간편 가입하기</a>
+            </p>
+          </fieldset>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
