@@ -37,7 +37,9 @@ const auth = (() => {
 // email validate
 const emailValidate = (expression, index, button) => {
   const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
-
+  if (!regEmail.test(expression)) {
+    document.querySelector('.signin-form-info label').style.top = '0';
+  }
   auth.checkIsCorrectForm(!regEmail.test(expression), index, '이메일 형식에 맞게 입력해 주세요.', button);
 };
 
