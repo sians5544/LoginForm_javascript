@@ -317,14 +317,6 @@ html.is-active {
   opacity: 1;
 }
 
-.edit-profile-button {
-  background-color: rgb(70, 121, 178);
-}
-
-.edit-profile-button:hover {
-  border: 1px solid rgb(70, 121, 178);
-}
-
 .signin-form-more {
   margin-top: 32px;
   text-align: center;
@@ -407,8 +399,8 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signup-form-info input:focus + label,
-.mypage-form-info input:focus + label {
+.signup-form-info input:focus+label,
+.mypage-form-info input:focus+label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -421,17 +413,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-<<<<<<< HEAD
-.haveLabel {
-  top: 10% !important;
-}
-
 .signup-form-info input:invalid+label, .mypage-form-info input:not(:placeholder-shown)+label, .mypage-form-info .mypage-label {
-=======
-.signup-form-info input:invalid + label,
-.mypage-form-info input:invalid + label,
-.mypage-form-info .mypage-label {
->>>>>>> 2c1999d53158194d96bc4aadd461455c3309ff17
   top: 10%;
 }
 
@@ -507,13 +489,6 @@ html.is-active {
   margin-bottom: 0.4375rem;
 }
 
-.complete-button {
-  background-color: rgb(70, 121, 178);
-}
-
-.withdraw-button {
-  background-color: rgb(225, 94, 85);
-}
 
 .form-back {
   margin-top: 1.875rem;
@@ -540,7 +515,7 @@ html.is-active {
   justify-content: center;
 }
 
-.header-logo > a {
+.header-logo>a {
   display: block;
   width: 48px;
 }
@@ -588,8 +563,20 @@ html.is-active {
   background-color: transparent;
   border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.2);
-<<<<<<< HEAD
 }
-=======
+
+.complete-button, .edit-profile-button {
+  background-color: rgb(70, 121, 178);
 }
->>>>>>> 2c1999d53158194d96bc4aadd461455c3309ff17
+
+.withdraw-button {
+  background-color: rgb(225, 94, 85);
+}
+
+.edit-profile-button {
+  background-color: rgb(70, 121, 178);
+}
+
+.edit-profile-button:hover {
+  border: 1px solid rgb(70, 121, 178);
+}
