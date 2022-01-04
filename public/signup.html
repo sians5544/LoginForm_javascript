@@ -6,12 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>회원가입 페이지</title>
     <link rel="stylesheet" href="./css/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.12.0/css/all.css"
+      integrity="sha384-ekOryaXPbeCpWQNxMwSWVvQ0+1VrStoPJq54shlYhR8HzQgig1v5fas6YgOqLoKz"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body class="signup-body">
     <header>
-      <h1>
-        <a href="./index.html"><img src="assets/logo.svg" alt="zerobase" /></a>
+      <h1 class="header-logo">
+        <a href="./signin.html"><i class="fal fa-user-circle fa-3x"></i></a>
       </h1>
     </header>
     <main>
@@ -27,7 +33,7 @@
             <div class="signup-form-info signup-form-email">
               <input id="email" minlength="100" type="email" class="signup-form-input" />
               <label for="email" class="signup-form-label email">이메일</label>
-              <button type="button" class="signup-form-email-button">인증메일 전송</button>
+              <button type="button" class="signup-form-email-button">중복확인</button>
             </div>
             <div class="signup-form-info signup-form-phone">
               <input id="phone" minlength="100" type="phone" class="signup-form-input" />
@@ -72,7 +78,7 @@
             <div>
               <button type="submit" class="signup-form-button">회원가입</button>
             </div>
-            <a href="./index.html" class="signup-form-back">뒤로가기</a>
+            <a href="./signin.html" class="signup-form-back">뒤로가기</a>
           </fieldset>
         </form>
       </section>
