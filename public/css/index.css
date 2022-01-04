@@ -177,7 +177,6 @@ html.is-active {
   overflow-y: hidden;
 }
 
-
 .body header {
   text-align: center;
   padding-top: 3rem;
@@ -241,7 +240,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:focus+label {
+.signin-form-info input:focus + label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -253,7 +252,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:invalid+label {
+.signin-form-info input:invalid + label {
   top: 10%;
 }
 
@@ -341,19 +340,22 @@ html.is-active {
   padding: 0.5rem;
 }
 
-.signup-body header, .mypage-body header {
+.signup-body header,
+.mypage-body header {
   text-align: center;
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
 .signup-body a, .mypage-body a {
+
   display: block;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
 }
 
-.signup-form, .mypage-form {
+.signup-form,
+.mypage-form {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 3rem;
@@ -361,7 +363,8 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
-  .signup-form, .mypage-form {
+  .signup-form,
+  .mypage-form {
     width: 100%;
     max-width: 20.9375rem;
   }
@@ -372,6 +375,7 @@ html.is-active {
 }
 
 .signup-form-info, .mypage-form-info {
+
   width: 20.9375rem;
   height: 3.675rem;
   margin-bottom: 1rem;
@@ -380,13 +384,15 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
-  .signup-form-info, .mypage-form-info {
+  .signup-form-info,
+  .mypage-form-info {
     width: 100%;
     max-width: 20.9375rem;
   }
 }
 
 .signup-form-info input, .mypage-form-info input {
+
   flex-grow: 1;
   padding-top: 0.8125rem;
   border: none;
@@ -424,6 +430,7 @@ html.is-active {
 }
 
 .signup-form-email-button, .mypage-form-email-button {
+
   position: absolute;
   height: 1.75rem;
   right: 0;
@@ -502,7 +509,8 @@ html.is-active {
   color: rgb(80, 80, 80);
 }
 
-.signup-form-check h2, .mypage-form-check h2 {
+.signup-form-check h2,
+.mypage-form-check h2 {
   color: #6c6c6c;
 }
 
@@ -515,3 +523,46 @@ html.is-active {
   display: block;
   width: 48px;
 }
+
+.signin-form .icon {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 1rem;
+  right: 0.4rem;
+  font-size: 1.4rem;
+  pointer-events: none;
+}
+
+.signin-form .icon.icon-success {
+  color: #2196f3;
+  /* color: var(--green); */
+}
+
+.signin-form .icon.icon-error {
+  color: #ed2553;
+}
+
+.signin-form .error {
+  position: absolute;
+  top: 120%;
+  left: 0.4rem;
+  font-size: 0.8rem;
+  color: #ed2553;
+}
+.hidden {
+  display: none !important;
+}
+.form-button {
+  border: 3px solid transparent;
+  background-color: #2196f3;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+.form-button:disabled {
+  background-color: transparent;
+  border: 3px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.2);
+}
+
