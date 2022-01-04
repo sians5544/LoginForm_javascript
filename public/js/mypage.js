@@ -1,8 +1,6 @@
 const render = (() => {
   document.querySelector('.form-back').onclick = () => sessionStorage.setItem('auth', 0);
 
-  sessionStorage.setItem('auth', 1);
-
   window.onload = async () => {
     const id = +localStorage.getItem('auth') ? +localStorage.getItem('auth') : +sessionStorage.getItem('auth');
 
