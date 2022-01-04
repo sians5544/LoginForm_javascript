@@ -240,7 +240,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:focus + label {
+.signin-form-info input:focus+label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -252,7 +252,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:invalid + label {
+.signin-form-info input:invalid+label {
   top: 10%;
 }
 
@@ -363,6 +363,7 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
+
   .signup-form,
   .mypage-form {
     width: 100%;
@@ -384,6 +385,7 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
+
   .signup-form-info,
   .mypage-form-info {
     width: 100%;
@@ -417,7 +419,11 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signup-form-info input:invalid+label, .mypage-form-info input:invalid+label, .mypage-form-info .mypage-label {
+.haveLabel {
+  top: 10% !important;
+}
+
+.signup-form-info input:invalid+label, .mypage-form-info input:not(:placeholder-shown)+label, .mypage-form-info .mypage-label {
   top: 10%;
 }
 
@@ -550,9 +556,11 @@ html.is-active {
   font-size: 0.8rem;
   color: #ed2553;
 }
+
 .hidden {
   display: none !important;
 }
+
 .form-button {
   border: 3px solid transparent;
   background-color: #2196f3;
@@ -560,9 +568,9 @@ html.is-active {
   cursor: pointer;
   outline: none;
 }
+
 .form-button:disabled {
   background-color: transparent;
   border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.2);
 }
-
