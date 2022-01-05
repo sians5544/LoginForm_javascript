@@ -70,40 +70,27 @@ const $autoLogin = document.querySelector('#auto__login');
 const $formButton = document.querySelector('.form-button');
 const $emailInput = document.querySelector('#email');
 const $passwordInput = document.querySelector('#password');
+const $singinError = document.querySelector('.singin-error-login');
 
 let checked = false;
 
-const searchId = async email => {
-  try {
-    const { data: user } = await axios.get('/users/email/sian@naver.com');
-  } catch (e) {
-    console.error(e);
-  }
-};
-
 $autoLogin.onchange = () => {
   checked = !checked;
-  searchId(document.querySelector('#email').value);
 };
 
 $formButton.onclick = async event => {
-  // event.preventDefault();
   try {
-    console.log('들어옴');
+    event.preventDefault();
     const { data: user } = await axios.post('/users/signin', {
       email: $emailInput.value,
       password: $passwordInput.value,
     });
 
-    console.log(user);
-    // if (checked && user) {
-    //   console.log('로그인 성공');
-    // }
     if (user) {
-      if (checked) localStorage.setItem('auth', user.id);
-      else sessionStorage.setItem('auth', user.id);
+      checked ? localStorage.setItem('auth', user.id) : sessionStorage.setItem('auth', user.id);
+      window.location.href = './mypage.html';
     } else {
-      event.preventDefault();
+      $singinError.innerHTML = '아이디 또는 비밀번호가 잘못 입력 되었습니다.';
     }
   } catch (e) {
     console.error(e);
