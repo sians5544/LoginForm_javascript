@@ -1,12 +1,16 @@
 // eslint-disable-next-line import/extensions
 import validate from './validate.js';
 
+const $emailInput = document.querySelector('.signup-form-email');
+
 document.querySelector('.signup-form').oninput = e => {
   const $signupButton = document.querySelector('.form-button');
   if (e.target.matches('#name')) {
     validate.nameValidate(e.target.value, 0, $signupButton);
   } else if (e.target.matches('#email')) {
     validate.emailValidate(e.target.value, 1, $signupButton);
+    $emailInput.querySelector('.icon-success').classList.add('hidden');
+    $emailInput.querySelector('.icon-error').classList.remove('hidden');
   } else if (e.target.matches('#phone')) {
     validate.phoneValidate(e.target.value, 2, $signupButton);
   } else if (e.target.matches('#password')) {
@@ -34,5 +38,20 @@ document.querySelector('.form-button').onclick = async event => {
     window.location.href = '/signin';
   } catch (e) {
     console.error(e);
+  }
+};
+
+document.querySelector('.signup-form-email-button').onclick = async () => {
+  const emailValue = document.querySelector('#email').value;
+
+  const res = await axios.get(`/users/email/${emailValue}`);
+  const { isDuplicate } = res.data;
+  if (isDuplicate) {
+    document.querySelector('.signup-form-email .error').innerHTML = '이미 존재하는 이메일 입니다.';
+  } else {
+    document.querySelector('.signup-form-email .error').innerHTML = '사용 가능한 이메일 입니다.';
+    document.querySelector('.signup-form-email .error').style.color = '#2196f3';
+    $emailInput.querySelector('.icon-success').classList.remove('hidden');
+    $emailInput.querySelector('.icon-error').classList.add('hidden');
   }
 };
