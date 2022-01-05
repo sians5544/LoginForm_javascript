@@ -5,14 +5,15 @@ const $email = document.querySelector('.mypage-form-email > input');
 const $name = document.querySelector('.mypage-form-name > input');
 const $phone = document.querySelector('.mypage-form-phone > input');
 const $password = document.querySelector('.mypage-form-password > input');
-const id = +localStorage.getItem('auth') ? +localStorage.getItem('auth') : +sessionStorage.getItem('auth');
 
-let nowUserPassword, nowUserId;
+let nowUserPassword;
+let
+  nowUserId;
 
 window.onload = async () => {
-  sessionStorage.setItem('auth', 1);
-
-  const { data: user } = await axios.get(`/users/${id}`);
+  const {
+    data: user
+  } = await axios.get('/jjongBin');
   console.log('GET', user);
 
   $email.value = user.email;
@@ -40,13 +41,13 @@ document.querySelector('.mypage-form').oninput = e => {
 $completeButton.onclick = async e => {
   e.preventDefault();
   try {
-    await axios.patch(`/users/${id}`, {
+    await axios.patch(`/users/${nowUserId}`, {
       name: $name.value,
       phone: $phone.value,
       password: $password.value,
     });
 
-    window.location.href = '/mypage.html';
+    window.location.href = '/mypage';
   } catch (e) {
     console.error(e);
   }

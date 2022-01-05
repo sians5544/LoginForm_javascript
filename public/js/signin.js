@@ -24,13 +24,14 @@ $autoLogin.onchange = () => {
 $formButton.onclick = async event => {
   try {
     event.preventDefault();
-    const { data: user } = await axios.post('/signin', {
+    const {
+      data: user
+    } = await axios.post('/signin', {
       email: $emailInput.value,
       password: $passwordInput.value,
     });
-    console.log(user._id);
     if (user) {
-      window.location.href = `/mypage/${user._id}`;
+      window.location.href = '/mypage';
     } else {
       $signinError.innerHTML = '아이디 또는 비밀번호가 잘못 입력 되었습니다.';
     }
