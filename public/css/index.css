@@ -519,7 +519,7 @@ html.is-active {
   width: 48px;
 }
 
-.signin-form .icon {
+.signin-form .icon, .mypage-form .icon {
   width: 24px;
   height: 24px;
   position: absolute;
@@ -529,16 +529,16 @@ html.is-active {
   pointer-events: none;
 }
 
-.signin-form .icon.icon-success {
+.signin-form .icon.icon-success, .mypage-form .icon.icon-success {
   color: #2196f3;
   /* color: var(--green); */
 }
 
-.signin-form .icon.icon-error {
+.signin-form .icon.icon-error, .mypage-form .icon.icon-error {
   color: #ed2553;
 }
 
-.signin-form .error {
+.signin-form .error, .mypage-form .error {
   position: absolute;
   top: 120%;
   left: 0.4rem;
@@ -577,10 +577,6 @@ html.is-active {
 
 .withdraw-button {
   background-color: rgb(225, 94, 85);
-}
-
-.edit-profile-button {
-  background-color: rgb(70, 121, 178);
 }
 
 .edit-profile-button:hover {
