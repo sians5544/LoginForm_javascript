@@ -7,6 +7,8 @@ const $phone = document.querySelector('.mypage-form-phone > input');
 const $password = document.querySelector('.mypage-form-password > input');
 const id = +localStorage.getItem('auth') ? +localStorage.getItem('auth') : +sessionStorage.getItem('auth');
 
+let nowUserPassword, nowUserId;
+
 window.onload = async () => {
   sessionStorage.setItem('auth', 1);
 
@@ -16,6 +18,11 @@ window.onload = async () => {
   $email.value = user.email;
   $name.value = user.name;
   $phone.value = user.phone;
+
+  nowUserId = user.id;
+  nowUserPassword = user.password;
+
+  console.log($email.value);
 };
 
 document.querySelector('.mypage-form').oninput = e => {
@@ -42,5 +49,33 @@ $completeButton.onclick = async e => {
     window.location.href = '/mypage.html';
   } catch (e) {
     console.error(e);
+  }
+};
+
+const $modal = document.querySelector('.popup');
+const $modalError = $modal.querySelector('.error');
+const popupHandle = () => {
+  document.querySelector('.cover').classList.toggle('hidden');
+  $modal.classList.toggle('hidden');
+  $modalError.textContent = '';
+};
+
+document.querySelector('.withdraw-button').onclick = e => {
+  e.preventDefault();
+  popupHandle();
+};
+$modal.querySelector('.cancle-button').onclick = () => {
+  popupHandle();
+};
+
+const $deletePasswordCheck = $modal.querySelector('.delete-password');
+$deletePasswordCheck.oninput = async () => {
+  if ($deletePasswordCheck.value === nowUserPassword) {
+    $modal.querySelector('.delete-button').removeAttribute('disabled');
+    // await axios.delete(`/users/${nowUserId}`);
+    // window.location.href = '/signin.html';
+    $modalError.textContent = '';
+  } else {
+    $modalError.textContent = '비밀번호가 일치하지 않습니다!';
   }
 };

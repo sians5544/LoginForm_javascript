@@ -63,7 +63,7 @@
           <!-- 회원가입 버튼 -->
           <div>
             <button type="submit" class="form-button complete-button" disabled>수정 완료</button>
-            <button type="submit" class="form-button withdraw-button" disabled>회원 탈퇴</button>
+            <button type="submit" class="form-button withdraw-button">회원 탈퇴</button>
           </div>
           <a href="./index.html" class="form-back">뒤로가기</a>
         </fieldset>
@@ -76,7 +76,8 @@
           정말로 계정을 삭제하시겠습니까?
         </p>
         <form>
-          <input class="delete-password" placeholder="삭제하시려면 비밀번호를 입력하세요." />
+          <input type="password" id="check-password" class="delete-password" placeholder="삭제하시려면 비밀번호를 입력하세요." />
+          <label for="check-password" class="error"></label>
           <!-- <button type="submit" class="popup-button ok-button">OK</button> -->
           <button type="button" class="popup-button delete-button" disabled>Delete</button>
         </form>

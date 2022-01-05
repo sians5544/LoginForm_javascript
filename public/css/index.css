@@ -523,7 +523,8 @@ html.is-active {
   color: #ed2553;
 }
 
-.signin-form .error, .mypage-form .error {
+/* .signin-form .error, .mypage-form .error,  { */
+.error {
   position: absolute;
   top: 120%;
   left: 0.4rem;
@@ -652,4 +653,10 @@ html.is-active {
 
 .cancle-button:hover {
   opacity: 1;
+}
+
+.popup .error {
+  position: absolute;
+  top: 63%;
+  left: 25%;
 }
