@@ -212,7 +212,8 @@ html.is-active {
   position: absolute;
 }
 
-.signin-form-info {
+.signin-form-info,
+.signup-form-info {
   width: 20.9375rem;
   height: 3.675rem;
   margin-bottom: 2.5rem;
@@ -365,7 +366,6 @@ html.is-active {
   position: absolute;
 }
 
-.signup-form-info,
 .mypage-form-info {
   width: 20.9375rem;
   height: 3.675rem;
@@ -519,7 +519,9 @@ html.is-active {
   width: 48px;
 }
 
-.signin-form .icon, .mypage-form .icon {
+.signin-form .icon,
+.signup-form .icon,
+.mypage-form .icon {
   width: 24px;
   height: 24px;
   position: absolute;
@@ -529,16 +531,22 @@ html.is-active {
   pointer-events: none;
 }
 
-.signin-form .icon.icon-success, .mypage-form .icon.icon-success {
+.signin-form .icon.icon-success,
+.signup-form .icon.icon-success,
+.mypage-form .icon.icon-success {
   color: #2196f3;
   /* color: var(--green); */
 }
 
-.signin-form .icon.icon-error, .mypage-form .icon.icon-error {
+.signin-form .icon.icon-error,
+.signup-form .icon.icon-error,
+.mypage-form .icon.icon-error {
   color: #ed2553;
 }
 
-.signin-form .error, .mypage-form .error {
+.signin-form .error,
+.signup-form .error,
+.mypage-form .error {
   position: absolute;
   top: 120%;
   left: 0.4rem;
@@ -581,4 +589,8 @@ html.is-active {
 
 .edit-profile-button:hover {
   border: 1px solid rgb(70, 121, 178);
+}
+
+.signup-form-email-button {
+  right: 10%;
 }
