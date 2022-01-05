@@ -38,6 +38,15 @@ let users = [
 app.use(express.static('public'));
 app.use(express.json());
 
+app.get('/users/test', (req, res) => {
+  res.send(users);
+});
+
+app.get('/users', (req, res) => {
+  const maxId = Math.max(...users.map(user => user.id), 0) + 1;
+  res.send({ maxId });
+});
+
 // 마이페이지에 데이터 뿌려주기
 app.get('/users/:id', (req, res) => {
   const { id } = req.params;
