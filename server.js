@@ -174,7 +174,8 @@ app.delete('/users/:id', (req, res) => {
     id
   } = req.params;
   users = users.filter(user => user.id !== +id);
-  res.send(users);
+
+  res.clearCookie(jwt.COOKIE_KEY).sendStatus(204);
 });
 
 // auth route
