@@ -174,7 +174,8 @@ app.delete('/users/:id', (req, res) => {
     id
   } = req.params;
   users = users.filter(user => user.id !== +id);
-  res.send(users);
+
+  res.clearCookie(jwt.COOKIE_KEY).sendStatus(204);
 });
 
 // auth route
@@ -185,9 +186,6 @@ app.get('/signin', (req, res) => {
 // root route
 // 미들웨어 auth를 사용해 로그인 여부를 체크한다.
 app.get('/mypage', auth, (req, res) => {
-  // const { id } = req.params;
-  // users = users.filter(user => user.id !== +id);
-  // res.send(users);
   res.sendFile(path.join(__dirname, './public/mypage.html'));
 });
 
