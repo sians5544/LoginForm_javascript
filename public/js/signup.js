@@ -31,7 +31,7 @@ document.querySelector('.form-button').onclick = async event => {
     });
 
     alert('회원가입이 완료되었습니다.');
-    window.location.href = './signin.html';
+    window.location.href = '/signin';
   } catch (e) {
     console.error(e);
   }

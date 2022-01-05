@@ -1,17 +1,12 @@
 const render = (() => {
-  document.querySelector('.form-back').onclick = () => sessionStorage.setItem('auth', 0);
+  document.querySelector('.form-back').onclick = () => {};
 
   window.onload = async () => {
-    sessionStorage.setItem('auth', 1);
-    const id = +localStorage.getItem('auth') ? +localStorage.getItem('auth') : +sessionStorage.getItem('auth');
+    const { data: user } = await axios.get(`/users/${id}`);
 
-    if (id) {
-      const { data: user } = await axios.get(`/users/${id}`);
-
-      document.querySelector('.mypage-form-email > input').value = user.email;
-      document.querySelector('.mypage-form-name > input').value = user.name;
-      document.querySelector('.mypage-form-phone > input').value = user.phone;
-    }
+    document.querySelector('.mypage-form-email > input').value = user.email;
+    document.querySelector('.mypage-form-name > input').value = user.name;
+    document.querySelector('.mypage-form-phone > input').value = user.phone;
   };
 })();
 

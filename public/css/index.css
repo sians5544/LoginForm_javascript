@@ -528,14 +528,12 @@ html.is-active {
   color: #ed2553;
 }
 
-<<<<<<< HEAD
-/* .signin-form .error, .mypage-form .error,  { */
-.error {
-=======
 .signin-form .error,
-.signup-form .error,
 .mypage-form .error {
->>>>>>> 89c4e9fe796ac59195d90817edf41bb8c1bc407b
+  /* .error { */
+  /* .signin-form .error,
+.signup-form .error,
+.mypage-form .error { */
   position: absolute;
   top: 120%;
   left: 0.4rem;
@@ -576,7 +574,6 @@ html.is-active {
   background-color: rgb(225, 94, 85);
 }
 
-<<<<<<< HEAD
 .cover {
   width: 100%;
   height: 100%;
@@ -613,7 +610,7 @@ html.is-active {
   width: 7rem;
   height: 1.875rem;
   border-radius: 7%;
-  padding: .5rem 1rem;
+  padding: 0.5rem 1rem;
   text-align: center;
   cursor: pointer;
   position: absolute;
@@ -623,7 +620,7 @@ html.is-active {
 .ok-button {
   left: 15%;
   bottom: 10%;
-  background-color: rgba(70, 121, 178, .7);
+  background-color: rgba(70, 121, 178, 0.7);
 }
 
 .delete-button {
@@ -631,8 +628,8 @@ html.is-active {
   transform: translateX(-50%);
   bottom: 10%;
   background-color: rgb(225, 94, 85);
-  opacity: .85;
-  transition: .2s;
+  opacity: 0.85;
+  transition: 0.2s;
 }
 
 .delete-button:not(:disabled):hover {
@@ -663,12 +660,11 @@ html.is-active {
   position: absolute;
   right: 0;
   top: 0;
-  margin: .6rem;
-  opacity: .6;
-  transition: .3s;
+  margin: 0.6rem;
+  opacity: 0.6;
+  transition: 0.3s;
   cursor: pointer;
 }
-
 
 .cancle-button:hover {
   opacity: 1;
@@ -679,7 +675,6 @@ html.is-active {
   top: 63%;
   left: 25%;
 }
-=======
 .edit-profile-button:hover {
   border: 1px solid rgb(70, 121, 178);
 }
@@ -687,4 +682,3 @@ html.is-active {
 .signup-form-email-button {
   right: 10%;
 }
->>>>>>> 89c4e9fe796ac59195d90817edf41bb8c1bc407b
