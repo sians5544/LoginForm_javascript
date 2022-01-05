@@ -5,14 +5,15 @@ const $email = document.querySelector('.mypage-form-email > input');
 const $name = document.querySelector('.mypage-form-name > input');
 const $phone = document.querySelector('.mypage-form-phone > input');
 const $password = document.querySelector('.mypage-form-password > input');
-const id = +localStorage.getItem('auth') ? +localStorage.getItem('auth') : +sessionStorage.getItem('auth');
 
-let nowUserPassword, nowUserId;
+let nowUserPassword;
+let
+  nowUserId;
 
 window.onload = async () => {
-  sessionStorage.setItem('auth', 1);
-
-  const { data: user } = await axios.get(`/users/${id}`);
+  const {
+    data: user
+  } = await axios.get('/jjongBin');
   console.log('GET', user);
 
   $email.value = user.email;
@@ -40,13 +41,13 @@ document.querySelector('.mypage-form').oninput = e => {
 $completeButton.onclick = async e => {
   e.preventDefault();
   try {
-    await axios.patch(`/users/${id}`, {
+    await axios.patch(`/users/${nowUserId}`, {
       name: $name.value,
       phone: $phone.value,
       password: $password.value,
     });
 
-    window.location.href = '/mypage.html';
+    window.location.href = '/mypage';
   } catch (e) {
     console.error(e);
   }
@@ -69,13 +70,25 @@ $modal.querySelector('.cancle-button').onclick = () => {
 };
 
 const $deletePasswordCheck = $modal.querySelector('.delete-password');
-$deletePasswordCheck.oninput = async () => {
+$deletePasswordCheck.oninput = () => {
   if ($deletePasswordCheck.value === nowUserPassword) {
     $modal.querySelector('.delete-button').removeAttribute('disabled');
-    // await axios.delete(`/users/${nowUserId}`);
-    // window.location.href = '/signin.html';
     $modalError.textContent = '';
   } else {
     $modalError.textContent = '비밀번호가 일치하지 않습니다!';
   }
+};
+// 그럼 나 이거 칠동안 생각해내면 그걸로 바꿔주지
+const $deleteButton = document.querySelector('.delete-button');
+$deleteButton.onclick = async () => {
+  // 혹시 내가 피시방에서 정보를 수정하고 있는데 어떤 fe나쁜놈이 disabled를 해제하고 버튼을 클릭해서 내 계정을 삭제할 때를 대비해서 !
+  if ($deleteButton.getAttribute('disabled') || $deletePasswordCheck.value !== nowUserPassword) return;
+
+  const check = await axios.delete(`/users/${nowUserId}`);
+
+  if (check.status === 204) window.location.href = '/signin';
+};
+
+document.querySelector('.form-back').onclick = () => {
+  window.location.href = '/mypage';
 };

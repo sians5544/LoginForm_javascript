@@ -9,8 +9,7 @@ const app = express();
 const port = 9001;
 
 // Mock data
-let users = [
-  {
+let users = [{
     id: 1,
     name: '조용우',
     email: 'ywc8851@naver.com',
@@ -68,12 +67,16 @@ app.get('/users/test', (req, res) => {
 
 app.get('/users', (req, res) => {
   const maxId = Math.max(...users.map(user => user.id), 0) + 1;
-  res.send({ maxId });
+  res.send({
+    maxId
+  });
 });
 
 // 마이페이지에 데이터 뿌려주기
 app.get('/users/:id', (req, res) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
   const user = users.find(user => user.id === +id);
 
   res.send(user);
@@ -81,10 +84,29 @@ app.get('/users/:id', (req, res) => {
 
 // 이메일 중복확인
 app.get('/users/email/:email', (req, res) => {
-  const { email } = req.params;
+  const {
+    email
+  } = req.params;
   const user = users.find(user => user.email === email);
   const isDuplicate = !!user;
-  res.send({ isDuplicate });
+  res.send({
+    isDuplicate
+  });
+});
+
+// test jjongBin
+app.get('/jjongBin', (req, res) => {
+  const accessToken = req.headers.authorization || req.cookies.accessToken;
+  try {
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+
+    console.log(decoded, decoded.email);
+    res.send(users.find(user => user.email === decoded.email));
+  } catch (e) {
+    console.error('😱 사용자 인증 실패..', e);
+    // 클라이언트로부터 토큰이 전달되지 않아 accessToken이 undefined이거나 토큰이 유효하지 않으면
+    return res.redirect('/auth/signin');
+  }
 });
 
 // 로그인
@@ -92,15 +114,28 @@ app.post('/signin', (req, res) => {
   // const payload = req.body;
   // const user = users.find(user => user.email === payload.email && payload.password === user.password);
   // res.send(user);
-  const { email, password } = req.body;
-  if (!email || !password) return res.status(401).send({ error: '사용자 아이디 또는 패스워드가 전달되지 않았습니다.' });
+  const {
+    email,
+    password
+  } = req.body;
+  if (!email || !password) {
+    return res.status(401).send({
+      error: '사용자 아이디 또는 패스워드가 전달되지 않았습니다.'
+    });
+  }
   const user = users.find(user => email === user.email && password === user.password);
   // const user = users.findUser(email, password);
   console.log('사용자 정보:', user);
 
-  if (!user) return res.status(401).send({ error: '등록되지 않은 사용자입니다.' });
+  if (!user) {
+    return res.status(401).send({
+      error: '등록되지 않은 사용자입니다.'
+    });
+  }
 
-  const accessToken = jwt.sign({ email }, process.env.JWT_SECRET_KEY, {
+  const accessToken = jwt.sign({
+    email
+  }, process.env.JWT_SECRET_KEY, {
     expiresIn: '1d',
   });
 
@@ -109,7 +144,9 @@ app.post('/signin', (req, res) => {
     httpOnly: true,
   });
   const _id = user.id;
-  res.send({ _id });
+  res.send({
+    _id
+  });
 });
 
 // 회원가입
@@ -120,17 +157,25 @@ app.post('/users/signup', (req, res) => {
 
 // 마이페이지 수정
 app.patch('/users/:id', (req, res) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
   const payload = req.body;
-  users = users.map(user => (user.id === +id ? { ...user, ...payload } : user));
+  users = users.map(user => (user.id === +id ? {
+    ...user,
+    ...payload
+  } : user));
   res.send(users);
 });
 
 // 회원탈퇴
 app.delete('/users/:id', (req, res) => {
-  const { id } = req.params;
+  const {
+    id
+  } = req.params;
   users = users.filter(user => user.id !== +id);
-  res.send(users);
+
+  res.clearCookie(jwt.COOKIE_KEY).sendStatus(204);
 });
 
 // auth route
@@ -140,13 +185,11 @@ app.get('/signin', (req, res) => {
 
 // root route
 // 미들웨어 auth를 사용해 로그인 여부를 체크한다.
-app.get('/mypage/:id', auth, (req, res) => {
-  // const { id } = req.params;
-  // users = users.filter(user => user.id !== +id);
-  // res.send(users);
+app.get('/mypage', auth, (req, res) => {
   res.sendFile(path.join(__dirname, './public/mypage.html'));
 });
-app.get('/mypageedit', auth, (req, res) => {
+
+app.get('/mypage_edit', auth, (req, res) => {
   res.sendFile(path.join(__dirname, './public/mypage_edit.html'));
 });
 
