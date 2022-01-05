@@ -5,7 +5,7 @@ const $formButton = document.querySelector('.form-button');
 const $autoLogin = document.querySelector('#auto__login');
 const $emailInput = document.querySelector('#email');
 const $passwordInput = document.querySelector('#password');
-const $singinError = document.querySelector('.singin-error-login');
+const $signinError = document.querySelector('.singin-error-login');
 
 let checked = false;
 
@@ -32,7 +32,7 @@ $formButton.onclick = async event => {
     if (user) {
       window.location.href = `/mypage/${user._id}`;
     } else {
-      $singinError.innerHTML = '아이디 또는 비밀번호가 잘못 입력 되었습니다.';
+      $signinError.innerHTML = '아이디 또는 비밀번호가 잘못 입력 되었습니다.';
     }
   } catch (e) {
     console.error(e);

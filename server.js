@@ -53,7 +53,7 @@ const auth = (req, res, next) => {
     // 서명이 유효하고 옵션인 expiration, audience, issuer 등이 유효한 경우 디코딩된 페이로드를 반환한다. 그렇지 않으면 에러가 발생한다.
     // https://www.npmjs.com/package/jsonwebtoken#jwtverifytoken-secretorpublickey-options-callback
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
-    console.log(`😀 사용자 인증 성공`, decoded);
+    console.log('😀 사용자 인증 성공', decoded);
     next();
   } catch (e) {
     console.error('😱 사용자 인증 실패..', e);
@@ -83,7 +83,8 @@ app.get('/users/:id', (req, res) => {
 app.get('/users/email/:email', (req, res) => {
   const { email } = req.params;
   const user = users.find(user => user.email === email);
-  res.send(user);
+  const isDuplicate = !!user;
+  res.send({ isDuplicate });
 });
 
 // 로그인
