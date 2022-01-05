@@ -67,7 +67,7 @@ app.post('/users/signup', (req, res) => {
 });
 
 // 마이페이지 수정
-app.patch('/users:id', (req, res) => {
+app.patch('/users/:id', (req, res) => {
   const { id } = req.params;
   const payload = req.body;
   users = users.map(user => (user.id === +id ? { ...user, ...payload } : user));

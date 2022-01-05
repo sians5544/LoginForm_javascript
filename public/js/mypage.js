@@ -2,12 +2,11 @@ const render = (() => {
   document.querySelector('.form-back').onclick = () => sessionStorage.setItem('auth', 0);
 
   window.onload = async () => {
+    sessionStorage.setItem('auth', 1);
     const id = +localStorage.getItem('auth') ? +localStorage.getItem('auth') : +sessionStorage.getItem('auth');
 
     if (id) {
-      const {
-        data: user
-      } = await axios.get(`/users/${id}`);
+      const { data: user } = await axios.get(`/users/${id}`);
 
       document.querySelector('.mypage-form-email > input').value = user.email;
       document.querySelector('.mypage-form-name > input').value = user.name;
@@ -17,5 +16,5 @@ const render = (() => {
 })();
 
 document.querySelector('.edit-profile-button').onclick = () => {
-  location.href = '/mypage_edit.html';
+  window.location.href = '/mypage_edit.html';
 };

@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="./css/index.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-  <script type="module" src="./js/mypage_edit.js"></script>
+  <script type="module" src="./js/mypageEdit.js"></script>
 </head>
 
 <body class="mypage-body">
@@ -32,14 +32,14 @@
           <div class="mypage-form-info mypage-form-name">
             <input id="name" type="text" class="mypage-form-input" placeholder=" " />
             <label for="name" class="mypage-form-label name">이름</label>
-            <i class="icon icon-success bx bxs-check-circle hidden"></i>
+            <i class="icon icon-success bx bxs-check-circle"></i>
             <i class="icon icon-error bx bxs-x-circle hidden"></i>
             <div class="error"></div>
           </div>
           <div class="mypage-form-info mypage-form-phone">
             <input id="phone" type="phone" class="mypage-form-input" placeholder=" " />
             <label for="phone" class="mypage-form-label phone">휴대전화</label>
-            <i class="icon icon-success bx bxs-check-circle hidden"></i>
+            <i class="icon icon-success bx bxs-check-circle"></i>
             <i class="icon icon-error bx bxs-x-circle hidden"></i>
             <div class="error"></div>
           </div>
@@ -60,8 +60,8 @@
 
           <!-- 회원가입 버튼 -->
           <div>
-            <button type="submit" class="form-button complete-button">수정 완료</button>
-            <button type="submit" class="form-button withdraw-button">회원 탈퇴</button>
+            <button type="submit" class="form-button complete-button" disabled>수정 완료</button>
+            <button type="submit" class="form-button withdraw-button" disabled>회원 탈퇴</button>
           </div>
           <a href="./index.html" class="form-back">뒤로가기</a>
         </fieldset>
