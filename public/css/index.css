@@ -155,22 +155,6 @@ table {
 body {
   background: #f2f4f8;
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 961px) {
-  body {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
-}
-
-@media (min-width: 711px) and (max-width: 960px) {
-  body {
-    padding-left: 5%;
-    padding-right: 5%;
-  }
 }
 
 html.is-active {
@@ -313,7 +297,7 @@ html.is-active {
   box-sizing: border-box;
 }
 
-.form-button:hover {
+.form-button:not(:disabled):hover {
   opacity: 1;
 }
 
@@ -370,7 +354,7 @@ html.is-active {
 .mypage-form-info {
   width: 20.9375rem;
   height: 3.675rem;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   display: flex;
   position: relative;
 }
@@ -539,7 +523,8 @@ html.is-active {
   color: #ed2553;
 }
 
-.signin-form .error, .mypage-form .error {
+/* .signin-form .error, .mypage-form .error,  { */
+.error {
   position: absolute;
   top: 120%;
   left: 0.4rem;
@@ -573,6 +558,105 @@ html.is-active {
   background-color: rgb(225, 94, 85);
 }
 
-.edit-profile-button:hover {
-  border: 1px solid rgb(70, 121, 178);
+.cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #000;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.popup {
+  background: #fff;
+  z-index: 10;
+  /* box-shadow: 0 0 10px 2px rgb(34, 34, 34); */
+  border-radius: 3%;
+  position: absolute;
+  top: 20%;
+  right: 50%;
+  transform: translateX(50%);
+  width: 30rem;
+  height: 16rem;
+}
+
+.popup p {
+  font-size: 1.625rem;
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+
+.popup-button {
+  all: unset;
+  width: 7rem;
+  height: 1.875rem;
+  border-radius: 7%;
+  padding: .5rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  color: #fff;
+}
+
+.ok-button {
+  left: 15%;
+  bottom: 10%;
+  background-color: rgba(70, 121, 178, .7);
+}
+
+.delete-button {
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 10%;
+  background-color: rgb(225, 94, 85);
+  opacity: .85;
+  transition: .2s;
+}
+
+.delete-button:not(:disabled):hover {
+  opacity: 1;
+}
+
+.delete-button:disabled {
+  background-color: #c5c5c5;
+}
+
+.delete-password {
+  border: none;
+  width: 50%;
+  height: 10%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom: 1px solid gray;
+}
+
+.delete-password:focus {
+  outline: none;
+}
+
+.cancle-button {
+  font-size: 2.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: .6rem;
+  opacity: .6;
+  transition: .3s;
+  cursor: pointer;
+}
+
+
+.cancle-button:hover {
+  opacity: 1;
+}
+
+.popup .error {
+  position: absolute;
+  top: 63%;
+  left: 25%;
 }
