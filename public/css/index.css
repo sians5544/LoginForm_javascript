@@ -395,9 +395,10 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signup-form-info input:invalid + label,
 .mypage-form-info input:not(:placeholder-shown) + label,
-.mypage-form-info .mypage-label {
+.mypage-form-info .mypage-label,
+.signin-form-info input:not(:placeholder-shown) + label,
+.signup-form-info input:not(:placeholder-shown) + label {
   top: 10%;
 }
 
@@ -529,6 +530,7 @@ html.is-active {
 }
 
 .signin-form .error,
+.signup-form .error,
 .mypage-form .error {
   /* .error { */
   /* .signin-form .error,
