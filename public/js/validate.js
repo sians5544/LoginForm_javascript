@@ -18,7 +18,11 @@ const countCorrectInput = (arr, index, btn) => {
 
   if (cnt === arr.length - 1) btn.removeAttribute('disabled');
 
-  if (!document.querySelector('.mypage-form-password .icon-success').classList.contains('hidden') && document.querySelector('#password').value === document.querySelector('#confirm-password').value) {
+
+  if (
+    !document.querySelector('.mypage-form-password .icon-success').classList.contains('hidden') &&
+    document.querySelector('#password').value === document.querySelector('#confirm-password').value
+  ) {
     $withdrawButton.removeAttribute('disabled');
   }
 };
@@ -26,7 +30,11 @@ const countCorrectInput = (arr, index, btn) => {
 const activeSubmitButton = (reg, index, btn) => {
   if (reg) btn.setAttribute('disabled', '');
   else {
-    countCorrectInput([...$iconSuccess].map((_, i) => i), index, btn);
+    countCorrectInput(
+      [...$iconSuccess].map((_, i) => i),
+      index,
+      btn
+    );
   }
 };
 
@@ -53,7 +61,12 @@ export default {
   phoneValidate(expression, index, button) {
     const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    return checkIsCorrectForm(!regPhone.test(expression), index, '전화번호를 형식에 맞게 입력해 입력해 주세요.', button);
+    return checkIsCorrectForm(
+      !regPhone.test(expression),
+      index,
+      '전화번호를 형식에 맞게 입력해 입력해 주세요.',
+      button
+    );
   },
 
   // password validate
@@ -65,6 +78,6 @@ export default {
 
   passwordConfirmValidate(expression, index, button) {
     return checkIsCorrectForm(expression, index, '비밀번호가 일치하지 않습니다.', button);
-  }
-
+  },
 };
+
