@@ -19,6 +19,7 @@ window.onload = async () => {
 };
 
 document.querySelector('.mypage-form').oninput = e => {
+
   if (e.target.matches('#name')) {
     validate.nameValidate(e.target.value, 0, $completeButton);
   } else if (e.target.matches('#phone')) {
@@ -44,3 +45,4 @@ $completeButton.onclick = async e => {
     console.error(e);
   }
 };
+
