@@ -18,12 +18,12 @@ const countCorrectInput = (arr, index, btn) => {
 
   if (cnt === arr.length - 1) btn.removeAttribute('disabled');
 
-  if (
-    !document.querySelector('.mypage-form-password .icon-success').classList.contains('hidden') &&
-    document.querySelector('#password').value === document.querySelector('#confirm-password').value
-  ) {
-    $withdrawButton.removeAttribute('disabled');
-  }
+  // if (
+  //   // !document.querySelector('.mypage-form-password .icon-success').classList.contains('hidden') &&
+  //   document.querySelector('#password').value === document.querySelector('#confirm-password').value
+  // ) {
+  //   $withdrawButton.removeAttribute('disabled');
+  // }
 };
 
 const activeSubmitButton = (reg, index, btn) => {

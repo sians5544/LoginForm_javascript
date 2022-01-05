@@ -196,7 +196,8 @@ html.is-active {
   position: absolute;
 }
 
-.signin-form-info {
+.signin-form-info,
+.signup-form-info {
   width: 20.9375rem;
   height: 3.675rem;
   margin-bottom: 2.5rem;
@@ -224,7 +225,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:focus+label {
+.signin-form-info input:focus + label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -236,7 +237,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:invalid+label {
+.signin-form-info input:invalid + label {
   top: 10%;
 }
 
@@ -337,7 +338,6 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
-
   .signup-form,
   .mypage-form {
     width: 100%;
@@ -350,7 +350,6 @@ html.is-active {
   position: absolute;
 }
 
-.signup-form-info,
 .mypage-form-info {
   width: 20.9375rem;
   height: 3.675rem;
@@ -360,7 +359,6 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
-
   .signup-form-info,
   .mypage-form-info {
     width: 100%;
@@ -383,8 +381,8 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signup-form-info input:focus+label,
-.mypage-form-info input:focus+label {
+.signup-form-info input:focus + label,
+.mypage-form-info input:focus + label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -397,7 +395,9 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signup-form-info input:invalid+label, .mypage-form-info input:not(:placeholder-shown)+label, .mypage-form-info .mypage-label {
+.signup-form-info input:invalid + label,
+.mypage-form-info input:not(:placeholder-shown) + label,
+.mypage-form-info .mypage-label {
   top: 10%;
 }
 
@@ -473,7 +473,6 @@ html.is-active {
   margin-bottom: 0.4375rem;
 }
 
-
 .form-back {
   margin-top: 1.875rem;
   text-align: center;
@@ -499,12 +498,14 @@ html.is-active {
   justify-content: center;
 }
 
-.header-logo>a {
+.header-logo > a {
   display: block;
   width: 48px;
 }
 
-.signin-form .icon, .mypage-form .icon {
+.signin-form .icon,
+.signup-form .icon,
+.mypage-form .icon {
   width: 24px;
   height: 24px;
   position: absolute;
@@ -514,22 +515,38 @@ html.is-active {
   pointer-events: none;
 }
 
-.signin-form .icon.icon-success, .mypage-form .icon.icon-success {
+.signin-form .icon.icon-success,
+.signup-form .icon.icon-success,
+.mypage-form .icon.icon-success {
   color: #2196f3;
   /* color: var(--green); */
 }
 
-.signin-form .icon.icon-error, .mypage-form .icon.icon-error {
+.signin-form .icon.icon-error,
+.signup-form .icon.icon-error,
+.mypage-form .icon.icon-error {
   color: #ed2553;
 }
 
+<<<<<<< HEAD
 /* .signin-form .error, .mypage-form .error,  { */
 .error {
+=======
+.signin-form .error,
+.signup-form .error,
+.mypage-form .error {
+>>>>>>> 89c4e9fe796ac59195d90817edf41bb8c1bc407b
   position: absolute;
   top: 120%;
   left: 0.4rem;
   font-size: 0.8rem;
   color: #ed2553;
+}
+
+.singin-error-login {
+  color: #ed2553;
+  padding-top: 1rem;
+  font-size: 1rem;
 }
 
 .hidden {
@@ -550,7 +567,8 @@ html.is-active {
   color: rgba(0, 0, 0, 0.2);
 }
 
-.complete-button, .edit-profile-button {
+.complete-button,
+.edit-profile-button {
   background-color: rgb(70, 121, 178);
 }
 
@@ -558,6 +576,7 @@ html.is-active {
   background-color: rgb(225, 94, 85);
 }
 
+<<<<<<< HEAD
 .cover {
   width: 100%;
   height: 100%;
@@ -660,3 +679,12 @@ html.is-active {
   top: 63%;
   left: 25%;
 }
+=======
+.edit-profile-button:hover {
+  border: 1px solid rgb(70, 121, 178);
+}
+
+.signup-form-email-button {
+  right: 10%;
+}
+>>>>>>> 89c4e9fe796ac59195d90817edf41bb8c1bc407b
