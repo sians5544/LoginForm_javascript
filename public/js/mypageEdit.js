@@ -5,6 +5,7 @@ const $email = document.querySelector('.mypage-form-email > input');
 const $name = document.querySelector('.mypage-form-name > input');
 const $phone = document.querySelector('.mypage-form-phone > input');
 const $password = document.querySelector('.mypage-form-password > input');
+const $confirmPwd = document.querySelector('#confirm-password');
 
 let nowUserPassword;
 let nowUserId;
@@ -30,9 +31,14 @@ document.querySelector('.mypage-form').oninput = e => {
     validate.phoneValidate(e.target.value, 1, $completeButton);
   } else if (e.target.matches('#password')) {
     validate.passwordValidate(e.target.value, 2, $completeButton);
+
+    const check = $password.parentNode.lastElementChild.textContent === '';
+    if ($confirmPwd.value !== '') {
+      validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), 3, $completeButton);
+    }
   } else if (e.target.matches('#confirm-password')) {
-    // const check = $password.parentNode.lastElementChild.classList.contains('hidden');
-    validate.passwordConfirmValidate(document.querySelector('#password').value !== e.target.value, 3, $completeButton);
+    const check = $password.parentNode.lastElementChild.textContent === '';
+    validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), 3, $completeButton);
   }
 };
 
