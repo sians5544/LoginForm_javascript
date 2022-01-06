@@ -86,7 +86,3 @@ $deleteButton.onclick = async () => {
 
   if (check.status === 204) window.location.href = '/signin';
 };
-
-document.querySelector('.form-back').onclick = () => {
-  window.location.href = '/mypage';
-};

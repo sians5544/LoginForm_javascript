@@ -1,10 +1,6 @@
 const render = (() => {
-  document.querySelector('.form-back').onclick = () => {};
-
   window.onload = async () => {
-    const {
-      data: user
-    } = await axios.get('/jjongBin');
+    const { data: user } = await axios.get('/jjongBin');
 
     if (user) {
       document.querySelector('.mypage-form-email > input').value = user.email;
@@ -16,4 +12,9 @@ const render = (() => {
 
 document.querySelector('.edit-profile-button').onclick = () => {
   window.location.href = '/mypage_edit';
+};
+
+document.querySelector('.form-back').onclick = async () => {
+  const check = await axios.post('/users/logout');
+  if (check.status === 204) window.location.href = '/signin';
 };
