@@ -652,7 +652,8 @@ html.is-active {
   background-color: #c5c5c5;
 }
 
-.delete-password {
+.delete-password,
+.find-password {
   border: none;
   width: 50%;
   height: 10%;
