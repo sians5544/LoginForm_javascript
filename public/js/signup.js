@@ -41,16 +41,21 @@ document.querySelector('.form-button').onclick = async event => {
   }
 };
 
+const $checkDuplicateMessage = document.querySelector('.signup-form-email .error');
+const changeText = (message, color) => {
+  $checkDuplicateMessage.innerHTML = message;
+  $checkDuplicateMessage.style.color = color;
+};
+
 document.querySelector('.signup-form-email-button').onclick = async () => {
   const emailValue = document.querySelector('#email').value;
 
   const res = await axios.get(`/users/email/${emailValue}`);
   const { isDuplicate } = res.data;
   if (isDuplicate) {
-    document.querySelector('.signup-form-email .error').innerHTML = '이미 존재하는 이메일 입니다.';
+    changeText('이미 존재하는 이메일 입니다.', '#ed2553');
   } else {
-    document.querySelector('.signup-form-email .error').innerHTML = '사용 가능한 이메일 입니다.';
-    document.querySelector('.signup-form-email .error').style.color = '#2196f3';
+    changeText('사용 가능한 이메일 입니다.', '#2196f3');
     $emailInput.querySelector('.icon-success').classList.remove('hidden');
     $emailInput.querySelector('.icon-error').classList.add('hidden');
   }

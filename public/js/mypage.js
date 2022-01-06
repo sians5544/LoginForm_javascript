@@ -1,6 +1,8 @@
 const render = (() => {
   window.onload = async () => {
-    const { data: user } = await axios.get('/jjongBin');
+    const {
+      data: user
+    } = await axios.get('/checkAuth');
 
     if (user) {
       document.querySelector('.mypage-form-email > input').value = user.email;
