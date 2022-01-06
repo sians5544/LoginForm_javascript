@@ -82,9 +82,8 @@ $deletePasswordCheck.oninput = () => {
 };
 // 그럼 나 이거 칠동안 생각해내면 그걸로 바꿔주지
 const $deleteButton = document.querySelector('.delete-button');
-const $form = $modal.querySelector('form');
 
-$form.onsubmit = async e => {
+$modal.querySelector('form').onsubmit = async e => {
   e.preventDefault();
   // 혹시 내가 피시방에서 정보를 수정하고 있는데 어떤 fe나쁜놈이 disabled를 해제하고 버튼을 클릭해서 내 계정을 삭제할 때를 대비해서 !
   if ($deleteButton.getAttribute('disabled') || $deletePasswordCheck.value !== nowUserPassword) return;
@@ -92,4 +91,8 @@ $form.onsubmit = async e => {
   const check = await axios.delete(`/users/${nowUserId}`);
 
   if (check.status === 204) window.location.href = '/signin';
+};
+
+document.querySelector('.form-back').onclick = () => {
+  window.location.href = '/mypage';
 };
