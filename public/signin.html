@@ -18,6 +18,7 @@
   </head>
 
   <body class="body">
+    <div class="cover hidden"></div>
     <header>
       <h1 class="header-logo">
         <a href="./signin.html"><i class="fal fa-user-circle fa-3x"></i></a>
@@ -51,7 +52,7 @@
                 <label for="auto__login">자동 로그인</label>
               </div>
               <!-- 체크박스 입력시 나올 문구 -->
-              <a href="#"><span>비밀번호 찾기</span></a>
+              <a href="#" class="find"><span>비밀번호 찾기</span></a>
             </div>
             <!-- 로그인 버튼 -->
             <div class="singin-error-login"></div>
@@ -64,6 +65,18 @@
             </p>
           </fieldset>
         </form>
+        <div class="popup hidden">
+          <h2 class="title hidden">check delete account</h2>
+          <i class="cancle-button bx bx-x"></i>
+          <p>비밀번호 찾기</p>
+          <form>
+            <input type="email" id="check-password" class="find-password" placeholder="이메일을 입력하세요." />
+            <label for="check-password" class="error"></label>
+            <!-- <button type="submit" class="popup-button ok-button">OK</button> -->
+            <div class="find-error"></div>
+            <button type="button" class="popup-button delete-button" disabled>찾기</button>
+          </form>
+        </div>
       </section>
     </main>
   </body>
