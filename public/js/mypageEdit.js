@@ -53,10 +53,13 @@ $completeButton.onclick = async e => {
 
 const $modal = document.querySelector('.popup');
 const $modalError = $modal.querySelector('.error');
+const $modalInput = $modal.querySelector('input');
+
 const popupHandle = () => {
   document.querySelector('.cover').classList.toggle('hidden');
   $modal.classList.toggle('hidden');
   $modalError.textContent = '';
+  $modalInput.value = '';
 };
 
 document.querySelector('.withdraw-button').onclick = e => {
@@ -68,6 +71,7 @@ $modal.querySelector('.cancle-button').onclick = () => {
 };
 
 const $deletePasswordCheck = $modal.querySelector('.delete-password');
+
 $deletePasswordCheck.oninput = () => {
   if ($deletePasswordCheck.value === nowUserPassword) {
     $modal.querySelector('.delete-button').removeAttribute('disabled');
@@ -78,10 +82,13 @@ $deletePasswordCheck.oninput = () => {
 };
 // 그럼 나 이거 칠동안 생각해내면 그걸로 바꿔주지
 const $deleteButton = document.querySelector('.delete-button');
-$deleteButton.onclick = async () => {
+const $form = $modal.querySelector('form');
+
+$form.onsubmit = async e => {
+  e.preventDefault();
   // 혹시 내가 피시방에서 정보를 수정하고 있는데 어떤 fe나쁜놈이 disabled를 해제하고 버튼을 클릭해서 내 계정을 삭제할 때를 대비해서 !
   if ($deleteButton.getAttribute('disabled') || $deletePasswordCheck.value !== nowUserPassword) return;
-
+  console.log('123');
   const check = await axios.delete(`/users/${nowUserId}`);
 
   if (check.status === 204) window.location.href = '/signin';
