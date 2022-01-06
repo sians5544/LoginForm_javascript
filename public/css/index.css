@@ -302,6 +302,11 @@ html.is-active {
   opacity: 1;
 }
 
+.form-button:disabled:hover {
+  cursor: default;
+}
+
+
 .signin-form-more {
   margin-top: 32px;
   text-align: center;
