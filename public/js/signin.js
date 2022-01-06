@@ -35,4 +35,45 @@ $formButton.onclick = async event => {
     console.error(e);
   }
 };
-// 입력된 email 로 아이디 값을 가져오기
+
+const $modal = document.querySelector('.popup');
+const $modalError = $modal.querySelector('.error');
+
+const popupHandle = () => {
+  document.querySelector('.cover').classList.toggle('hidden');
+  $modal.classList.toggle('hidden');
+  $modalError.textContent = '';
+  document.querySelector('.find-password').value = '';
+  document.querySelector('.popup-button').setAttribute('disabled', '');
+};
+
+document.querySelector('.find').onclick = e => {
+  e.preventDefault();
+  popupHandle();
+};
+
+$modal.querySelector('.cancle-button').onclick = () => {
+  popupHandle();
+};
+
+document.querySelector('.find-password').oninput = e => {
+  const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+
+  if (regEmail.test(e.target.value)) {
+    document.querySelector('.popup-button').removeAttribute('disabled');
+  } else {
+    document.querySelector('.popup-button').setAttribute('disabled', '');
+  }
+};
+
+document.querySelector('.popup-button').onclick = async e => {
+  e.preventDefault();
+  try {
+    const findPassword = document.querySelector('.find-password').value;
+    const res = await axios.get(`/user/find/${findPassword}`);
+    document.querySelector('.find-password').value = res.data.passwordHint;
+  } catch (e) {
+    console.error(e);
+    document.querySelector('.popup .error').innerHTML = '존재하지 않는 이메일 입니다.';
+  }
+};
