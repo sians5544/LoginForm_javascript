@@ -164,6 +164,11 @@ app.post('/signin', (req, res) => {
   });
 });
 
+// 로그아웃
+app.post('/users/logout', (req, res) => {
+  res.clearCookie('accessToken').sendStatus(204);
+});
+
 // 회원가입
 app.post('/users/signup', (req, res) => {
   users = [req.body, ...users];
@@ -190,7 +195,7 @@ app.delete('/users/:id', (req, res) => {
   const { id } = req.params;
   users = users.filter(user => user.id !== +id);
 
-  res.clearCookie(jwt.COOKIE_KEY).sendStatus(204);
+  res.clearCookie('accessToken').sendStatus(204);
 });
 
 // auth route
