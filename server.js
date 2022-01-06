@@ -43,6 +43,7 @@ app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
 
+// middleware
 const auth = (req, res, next) => {
   const accessToken = req.headers.authorization || req.cookies.accessToken;
   try {
@@ -53,21 +54,42 @@ const auth = (req, res, next) => {
   }
 };
 
+// root route
+app.get('/checkAuth', (req, res) => {
+  const accessToken = req.headers.authorization || req.cookies.accessToken;
+  try {
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+
+    res.send(users.find(user => user.email === decoded.email));
+  } catch (e) {
+    return res.redirect('/signin');
+  }
+});
+
+app.get('/signin', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/signin.html'));
+});
+
+// 미들웨어 auth를 사용해 로그인 여부를 체크
+app.get('/', auth, (req, res) => {
+  res.sendFile(path.join(__dirname, './public/mypage.html'));
+});
+
+app.get('/mypage', auth, (req, res) => {
+  res.sendFile(path.join(__dirname, './public/mypage.html'));
+});
+
+app.get('/mypage_edit', auth, (req, res) => {
+  res.sendFile(path.join(__dirname, './public/mypage_edit.html'));
+});
+
+// get
+// create new id
 app.get('/users', (req, res) => {
   const maxId = Math.max(...users.map(user => user.id), 0) + 1;
   res.send({
     maxId,
   });
-});
-
-// 마이페이지에 데이터 뿌려주기
-app.get('/users/:id', (req, res) => {
-  const {
-    id
-  } = req.params;
-  const user = users.find(user => user.id === +id);
-
-  res.send(user);
 });
 
 // 이메일 중복확인
@@ -82,6 +104,7 @@ app.get('/users/email/:email', (req, res) => {
   });
 });
 
+// find password
 app.get('/user/find/:email', (req, res) => {
   const {
     email
@@ -102,22 +125,14 @@ app.get('/user/find/:email', (req, res) => {
   }
 });
 
-app.get('/checkAuth', (req, res) => {
-  const accessToken = req.headers.authorization || req.cookies.accessToken;
-  try {
-    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
-
-    res.send(users.find(user => user.email === decoded.email));
-  } catch (e) {
-    return res.redirect('/signin');
-  }
+// 로그아웃
+app.get('/users/logout', (req, res) => {
+  res.clearCookie('accessToken').sendStatus(204);
 });
 
+// post
 // 로그인
 app.post('/signin', (req, res) => {
-  // const payload = req.body;
-  // const user = users.find(user => user.email === payload.email && payload.password === user.password);
-  // res.send(user);
   const {
     email,
     password
@@ -128,8 +143,6 @@ app.post('/signin', (req, res) => {
     });
   }
   const user = users.find(user => email === user.email && password === user.password);
-  // const user = users.findUser(email, password);
-  console.log('사용자 정보:', user);
 
   if (!user) {
     return res.status(401).send({
@@ -157,17 +170,13 @@ app.post('/signin', (req, res) => {
   });
 });
 
-// 로그아웃
-app.post('/users/logout', (req, res) => {
-  res.clearCookie('accessToken').sendStatus(204);
-});
-
 // 회원가입
 app.post('/users/signup', (req, res) => {
   users = [req.body, ...users];
   res.send(users);
 });
 
+// patch
 // 마이페이지 수정
 app.patch('/users/:id', (req, res) => {
   const {
@@ -182,6 +191,7 @@ app.patch('/users/:id', (req, res) => {
   res.send(users);
 });
 
+// delete
 // 회원탈퇴
 app.delete('/users/:id', (req, res) => {
   const {
@@ -190,26 +200,6 @@ app.delete('/users/:id', (req, res) => {
   users = users.filter(user => user.id !== +id);
 
   res.clearCookie('accessToken').sendStatus(204);
-});
-
-// auth route
-app.get('/signin', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/signin.html'));
-});
-
-// root route
-// 미들웨어 auth를 사용해 로그인 여부를 체크한다.
-app.get('/mypage', auth, (req, res) => {
-  res.sendFile(path.join(__dirname, './public/mypage.html'));
-});
-
-app.get('/mypage_edit', auth, (req, res) => {
-  res.sendFile(path.join(__dirname, './public/mypage_edit.html'));
-});
-
-app.get('/', auth, (req, res) => {
-  console.log(req.header);
-  res.sendFile(path.join(__dirname, './public/mypage.html'));
 });
 
 // 서버에서 계속 듣고있음

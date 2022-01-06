@@ -17,6 +17,6 @@ document.querySelector('.edit-profile-button').onclick = () => {
 };
 
 document.querySelector('.form-back').onclick = async () => {
-  const check = await axios.post('/users/logout');
+  const check = await axios.get('/users/logout');
   if (check.status === 204) window.location.href = '/signin';
 };

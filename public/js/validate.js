@@ -1,7 +1,6 @@
 const $iconSuccess = document.querySelectorAll('.icon-success');
 const $iconError = document.querySelectorAll('.icon-error');
 const $error = document.querySelectorAll('.error');
-const $withdrawButton = document.querySelector('.withdraw-button');
 
 const iconChange = (index, isError) => {
   if (isError) {
@@ -17,13 +16,6 @@ const countCorrectInput = (arr, index, btn) => {
   const cnt = arr.filter(idx => (idx !== index ? !$iconSuccess[idx].classList.contains('hidden') : false)).length;
 
   if (cnt === arr.length - 1) btn.removeAttribute('disabled');
-
-  // if (
-  //   // !document.querySelector('.mypage-form-password .icon-success').classList.contains('hidden') &&
-  //   document.querySelector('#password').value === document.querySelector('#confirm-password').value
-  // ) {
-  //   $withdrawButton.removeAttribute('disabled');
-  // }
 };
 
 const activeSubmitButton = (reg, index, btn) => {
@@ -44,7 +36,6 @@ const checkIsCorrectForm = (reg, index, msg, btn) => {
 };
 
 export default {
-  // email validate
   emailValidate(value, index, button) {
     const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
