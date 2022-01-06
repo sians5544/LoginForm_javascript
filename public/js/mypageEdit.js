@@ -7,14 +7,13 @@ const $phone = document.querySelector('.mypage-form-phone > input');
 const $password = document.querySelector('.mypage-form-password > input');
 const $confirmPwd = document.querySelector('#confirm-password');
 
-let nowUserPassword;
 let nowUserId;
+let nowUserPassword;
 
 window.onload = async () => {
   const {
     data: user
   } = await axios.get('/checkAuth');
-  console.log('GET', user);
 
   $email.value = user.email;
   $name.value = user.name;
@@ -22,25 +21,28 @@ window.onload = async () => {
 
   nowUserId = user.id;
   nowUserPassword = user.password;
-
-  console.log($email.value);
 };
+
+const INPUT_NAME_INDEX = 0;
+const INPUT_PHONE_INDEX = 1;
+const INPUT_PASSWORD_INDEX = 2;
+const INPUT_CONFIRM_PASSWORD_INDEX = 3;
 
 document.querySelector('.mypage-form').oninput = e => {
   if (e.target.matches('#name')) {
-    validate.nameValidate(e.target.value, 0, $completeButton);
+    validate.nameValidate(e.target.value, INPUT_NAME_INDEX, $completeButton);
   } else if (e.target.matches('#phone')) {
-    validate.phoneValidate(e.target.value, 1, $completeButton);
+    validate.phoneValidate(e.target.value, INPUT_PHONE_INDEX, $completeButton);
   } else if (e.target.matches('#password')) {
-    validate.passwordValidate(e.target.value, 2, $completeButton);
+    validate.passwordValidate(e.target.value, INPUT_PASSWORD_INDEX, $completeButton);
 
     const check = $password.parentNode.lastElementChild.textContent === '';
     if ($confirmPwd.value !== '') {
-      validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), 3, $completeButton);
+      validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), INPUT_CONFIRM_PASSWORD_INDEX, $completeButton);
     }
   } else if (e.target.matches('#confirm-password')) {
     const check = $password.parentNode.lastElementChild.textContent === '';
-    validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), 3, $completeButton);
+    validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), INPUT_CONFIRM_PASSWORD_INDEX, $completeButton);
   }
 };
 
@@ -70,8 +72,7 @@ const popupHandle = () => {
   $modalInput.value = '';
 };
 
-document.querySelector('.withdraw-button').onclick = e => {
-  e.preventDefault();
+document.querySelector('.withdraw-button').onclick = () => {
   popupHandle();
 };
 $modal.querySelector('.cancle-button').onclick = () => {
@@ -88,14 +89,12 @@ $deletePasswordCheck.oninput = () => {
     $modalError.textContent = '비밀번호가 일치하지 않습니다!';
   }
 };
-// 그럼 나 이거 칠동안 생각해내면 그걸로 바꿔주지
-const $deleteButton = document.querySelector('.delete-button');
 
 $modal.querySelector('form').onsubmit = async e => {
   e.preventDefault();
-  // 혹시 내가 피시방에서 정보를 수정하고 있는데 어떤 fe나쁜놈이 disabled를 해제하고 버튼을 클릭해서 내 계정을 삭제할 때를 대비해서 !
-  if ($deleteButton.getAttribute('disabled') || $deletePasswordCheck.value !== nowUserPassword) return;
-  console.log('123');
+
+  if (document.querySelector('.delete-button').getAttribute('disabled') || $deletePasswordCheck.value !== nowUserPassword) return;
+
   const check = await axios.delete(`/users/${nowUserId}`);
 
   if (check.status === 204) window.location.href = '/signin';

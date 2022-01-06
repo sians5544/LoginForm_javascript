@@ -546,10 +546,6 @@ html.is-active {
 .signup-form .error,
 .mypage-form .error,
 .popup .error {
-  /* .error { */
-  /* .signin-form .error,
-.signup-form .error,
-.mypage-form .error { */
   position: absolute;
   top: 120%;
   left: 0.4rem;
@@ -602,7 +598,6 @@ html.is-active {
 .popup {
   background: #fff;
   z-index: 10;
-  /* box-shadow: 0 0 10px 2px rgb(34, 34, 34); */
   border-radius: 3%;
   position: absolute;
   top: 20%;
