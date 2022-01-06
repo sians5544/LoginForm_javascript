@@ -10,7 +10,9 @@ let nowUserPassword;
 let nowUserId;
 
 window.onload = async () => {
-  const { data: user } = await axios.get('/jjongBin');
+  const {
+    data: user
+  } = await axios.get('/checkAuth');
   console.log('GET', user);
 
   $email.value = user.email;
