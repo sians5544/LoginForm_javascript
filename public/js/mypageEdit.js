@@ -7,13 +7,10 @@ const $phone = document.querySelector('.mypage-form-phone > input');
 const $password = document.querySelector('.mypage-form-password > input');
 
 let nowUserPassword;
-let
-  nowUserId;
+let nowUserId;
 
 window.onload = async () => {
-  const {
-    data: user
-  } = await axios.get('/jjongBin');
+  const { data: user } = await axios.get('/jjongBin');
   console.log('GET', user);
 
   $email.value = user.email;
@@ -34,6 +31,7 @@ document.querySelector('.mypage-form').oninput = e => {
   } else if (e.target.matches('#password')) {
     validate.passwordValidate(e.target.value, 2, $completeButton);
   } else if (e.target.matches('#confirm-password')) {
+    // const check = $password.parentNode.lastElementChild.classList.contains('hidden');
     validate.passwordConfirmValidate(document.querySelector('#password').value !== e.target.value, 3, $completeButton);
   }
 };

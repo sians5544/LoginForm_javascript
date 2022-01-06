@@ -225,7 +225,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:focus + label {
+.signin-form-info input:focus+label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -237,7 +237,7 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signin-form-info input:invalid + label {
+.signin-form-info input:invalid+label {
   top: 10%;
 }
 
@@ -289,13 +289,13 @@ html.is-active {
   letter-spacing: -0.01875rem;
   line-height: 1.5rem;
   width: 100%;
-  border: 1px solid #f2f4f8;
+  border: none;
   border-radius: 0.625rem;
   line-height: 1.875rem;
   cursor: pointer;
   opacity: 0.8;
   transition: all 0.3s;
-  box-sizing: border-box;
+  background-color: #2196f3;
 }
 
 .form-button:not(:disabled):hover {
@@ -322,8 +322,7 @@ html.is-active {
   padding-bottom: 3rem;
 }
 
-.signup-body a,
-.mypage-body a {
+.signup-body a {
   display: block;
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
@@ -338,6 +337,7 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
+
   .signup-form,
   .mypage-form {
     width: 100%;
@@ -359,6 +359,7 @@ html.is-active {
 }
 
 @media (max-width: 710px) {
+
   .signup-form-info,
   .mypage-form-info {
     width: 100%;
@@ -381,8 +382,8 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.signup-form-info input:focus + label,
-.mypage-form-info input:focus + label {
+.signup-form-info input:focus+label,
+.mypage-form-info input:focus+label {
   top: 10%;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
@@ -395,10 +396,10 @@ html.is-active {
   border-bottom: 1px solid blue;
 }
 
-.mypage-form-info input:not(:placeholder-shown) + label,
+.mypage-form-info input:not(:placeholder-shown)+label,
 .mypage-form-info .mypage-label,
-.signin-form-info input:not(:placeholder-shown) + label,
-.signup-form-info input:not(:placeholder-shown) + label {
+.signin-form-info input:not(:placeholder-shown)+label,
+.signup-form-info input:not(:placeholder-shown)+label {
   top: 10%;
 }
 
@@ -475,12 +476,19 @@ html.is-active {
 }
 
 .form-back {
+  padding: 0;
+  all: unset;
   margin-top: 1.875rem;
   text-align: center;
   font-size: 0.75rem;
   letter-spacing: -0.01875rem;
   line-height: 1.125rem;
   color: #101010;
+  border-bottom: 1px solid #101010;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
 }
 
 .mypage-title {
@@ -499,7 +507,7 @@ html.is-active {
   justify-content: center;
 }
 
-.header-logo > a {
+.header-logo>a {
   display: block;
   width: 48px;
 }
@@ -531,7 +539,8 @@ html.is-active {
 
 .signin-form .error,
 .signup-form .error,
-.mypage-form .error {
+.mypage-form .error,
+.popup .error {
   /* .error { */
   /* .signin-form .error,
 .signup-form .error,
@@ -554,7 +563,6 @@ html.is-active {
 }
 
 .form-button {
-  border: 3px solid transparent;
   background-color: #2196f3;
   color: #fff;
   cursor: pointer;
@@ -566,6 +574,7 @@ html.is-active {
   border: 3px solid rgba(0, 0, 0, 0.1);
   color: rgba(0, 0, 0, 0.2);
 }
+
 
 .complete-button,
 .edit-profile-button {
@@ -639,6 +648,7 @@ html.is-active {
 }
 
 .delete-button:disabled {
+  cursor: default;
   background-color: #c5c5c5;
 }
 
@@ -676,9 +686,6 @@ html.is-active {
   position: absolute;
   top: 63%;
   left: 25%;
-}
-.edit-profile-button:hover {
-  border: 1px solid rgb(70, 121, 178);
 }
 
 .signup-form-email-button {
