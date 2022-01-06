@@ -45,37 +45,32 @@ const checkIsCorrectForm = (reg, index, msg, btn) => {
 
 export default {
   // email validate
-  emailValidate(expression, index, button) {
+  emailValidate(value, index, button) {
     const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-    return checkIsCorrectForm(!regEmail.test(expression), index, '이메일 형식에 맞게 입력해 주세요.', button);
+    return checkIsCorrectForm(!regEmail.test(value), index, '이메일 형식에 맞게 입력해 주세요.', button);
   },
 
-  nameValidate(expression, index, button) {
+  nameValidate(value, index, button) {
     const regName = /^[^\s]{1,}$/;
 
-    return checkIsCorrectForm(!regName.test(expression), index, '이름을 입력해 주세요.', button);
+    return checkIsCorrectForm(!regName.test(value), index, '이름을 입력해 주세요.', button);
   },
 
-  phoneValidate(expression, index, button) {
+  phoneValidate(value, index, button) {
     const regPhone = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-    return checkIsCorrectForm(
-      !regPhone.test(expression),
-      index,
-      '전화번호를 형식에 맞게 입력해 입력해 주세요.',
-      button
-    );
+    return checkIsCorrectForm(!regPhone.test(value), index, '전화번호를 형식에 맞게 입력해 입력해 주세요.', button);
   },
 
   // password validate
-  passwordValidate(expression, index, button) {
+  passwordValidate(value, index, button) {
     const regPassword = /^[A-Za-z0-9]{6,12}$/;
 
-    return checkIsCorrectForm(!regPassword.test(expression), index, '영문 또는 숫자를 6~12자 입력하세요.', button);
+    return checkIsCorrectForm(!regPassword.test(value), index, '영문 또는 숫자를 6~12자 입력하세요.', button);
   },
 
-  passwordConfirmValidate(expression, index, button) {
-    return checkIsCorrectForm(expression, index, '비밀번호가 일치하지 않습니다.', button);
+  passwordConfirmValidate(value, index, button) {
+    return checkIsCorrectForm(value, index, '비밀번호가 올바르지 않습니다.', button);
   },
 };
