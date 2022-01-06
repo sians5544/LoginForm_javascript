@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const req = require('express/lib/request');
 
 require('dotenv').config();
 
@@ -89,6 +90,22 @@ app.get('/users/email/:email', (req, res) => {
   res.send({
     isDuplicate,
   });
+});
+
+app.get('/user/find/:email', (req, res) => {
+  const { email } = req.params;
+
+  const user = users.find(user => user.email === email);
+
+  if (user) {
+    const len = user.password.length;
+    const passwordHint = user.password.slice(0, 2) + '*'.repeat(len - 2);
+    res.send({ passwordHint });
+  } else {
+    return res.status(401).send({
+      error: '존재하지 않는 이메일 입니다.',
+    });
+  }
 });
 
 // test jjongBin
