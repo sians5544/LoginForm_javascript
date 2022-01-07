@@ -5,11 +5,6 @@ const $emailInput = document.querySelector('.signup-form-email');
 const $duplicateButton = document.querySelector('.signup-form-email-button');
 const $signupButton = document.querySelector('.form-button');
 
-const toggleIcon = () => {
-  $emailInput.querySelector('.icon-success').classList.add('hidden');
-  $emailInput.querySelector('.icon-error').classList.remove('hidden');
-};
-
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
 document.querySelector('.signup-form').oninput = e => {
@@ -17,8 +12,8 @@ document.querySelector('.signup-form').oninput = e => {
     validate.nameValidate(e.target.value, 0, $signupButton);
   } else if (e.target.matches('#email')) {
     validate.emailValidate(e.target.value, 1, $signupButton);
-    toggleIcon();
-
+    $emailInput.querySelector('.icon-success').classList.add('hidden');
+    $emailInput.querySelector('.icon-error').classList.remove('hidden');
     if (regEmail.test(e.target.value)) {
       $duplicateButton.removeAttribute('disabled');
     } else {
@@ -73,7 +68,9 @@ $duplicateButton.onclick = async () => {
       changeText('이미 존재하는 이메일 입니다.', '#ed2553');
     } else {
       changeText('사용 가능한 이메일 입니다.', '#2196f3');
-      toggleIcon();
+
+      $emailInput.querySelector('.icon-error').classList.add('hidden');
+      $emailInput.querySelector('.icon-success').classList.remove('hidden');
     }
   } catch (error) {
     console.error(error);
