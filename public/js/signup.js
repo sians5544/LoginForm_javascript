@@ -2,6 +2,12 @@
 import validate from './validate.js';
 
 const $emailInput = document.querySelector('.signup-form-email');
+const $duplicateButton = document.querySelector('.signup-form-email-button');
+
+const toggleIcon = () => {
+  $emailInput.querySelector('.icon-success').classList.add('hidden');
+  $emailInput.querySelector('.icon-error').classList.remove('hidden');
+};
 
 document.querySelector('.signup-form').oninput = e => {
   const $signupButton = document.querySelector('.form-button');
@@ -9,8 +15,13 @@ document.querySelector('.signup-form').oninput = e => {
     validate.nameValidate(e.target.value, 0, $signupButton);
   } else if (e.target.matches('#email')) {
     validate.emailValidate(e.target.value, 1, $signupButton);
-    $emailInput.querySelector('.icon-success').classList.add('hidden');
-    $emailInput.querySelector('.icon-error').classList.remove('hidden');
+    toggleIcon();
+    const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+    if (regEmail.test(e.target.value)) {
+      $duplicateButton.removeAttribute('disabled');
+    } else {
+      $duplicateButton.setAttribute('disabled', '');
+    }
   } else if (e.target.matches('#phone')) {
     validate.phoneValidate(e.target.value, 2, $signupButton);
   } else if (e.target.matches('#password')) {
@@ -47,16 +58,20 @@ const changeText = (message, color) => {
   $checkDuplicateMessage.style.color = color;
 };
 
-document.querySelector('.signup-form-email-button').onclick = async () => {
-  const emailValue = document.querySelector('#email').value;
+$duplicateButton.onclick = async () => {
+  try {
+    const emailValue = document.querySelector('#email').value;
 
-  const res = await axios.get(`/users/email/${emailValue}`);
-  const { isDuplicate } = res.data;
-  if (isDuplicate) {
-    changeText('이미 존재하는 이메일 입니다.', '#ed2553');
-  } else {
-    changeText('사용 가능한 이메일 입니다.', '#2196f3');
-    $emailInput.querySelector('.icon-success').classList.remove('hidden');
-    $emailInput.querySelector('.icon-error').classList.add('hidden');
+    const res = await axios.get(`/users/email/${emailValue}`);
+    const { isDuplicate } = res.data;
+
+    if (isDuplicate) {
+      changeText('이미 존재하는 이메일 입니다.', '#ed2553');
+    } else {
+      changeText('사용 가능한 이메일 입니다.', '#2196f3');
+      toggleIcon();
+    }
+  } catch (e) {
+    console.error(e);
   }
 };

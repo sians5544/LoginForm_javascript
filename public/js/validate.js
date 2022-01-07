@@ -32,6 +32,7 @@ const activeSubmitButton = (reg, index, btn) => {
 const checkIsCorrectForm = (reg, index, msg, btn) => {
   iconChange(index, reg);
   $error[index].textContent = reg ? msg : '';
+  $error[index].style.color = '#ed2553';
   activeSubmitButton(reg, index, btn);
 };
 
