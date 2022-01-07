@@ -9,7 +9,8 @@ const app = express();
 const port = 9001;
 
 // Mock data
-let users = [{
+let users = [
+  {
     id: 1,
     name: '조용우',
     email: 'ywc8851@naver.com',
@@ -46,6 +47,7 @@ app.use(cookieParser());
 // middleware
 const auth = (req, res, next) => {
   const accessToken = req.headers.authorization || req.cookies.accessToken;
+
   try {
     jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
     next();
@@ -57,6 +59,7 @@ const auth = (req, res, next) => {
 // root route
 app.get('/checkAuth', (req, res) => {
   const accessToken = req.headers.authorization || req.cookies.accessToken;
+
   try {
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
 
@@ -83,10 +86,10 @@ app.get('/mypage_edit', auth, (req, res) => {
   res.sendFile(path.join(__dirname, './public/mypage_edit.html'));
 });
 
-// get
-// create new id
+// id 번호 자동 생성
 app.get('/users', (req, res) => {
   const maxId = Math.max(...users.map(user => user.id), 0) + 1;
+
   res.send({
     maxId,
   });
@@ -94,29 +97,26 @@ app.get('/users', (req, res) => {
 
 // 이메일 중복확인
 app.get('/users/email/:email', (req, res) => {
-  const {
-    email
-  } = req.params;
+  const { email } = req.params;
   const user = users.find(user => user.email === email);
   const isDuplicate = !!user;
+
   res.send({
     isDuplicate,
   });
 });
 
-// find password
+// 비밀번호 찾기
 app.get('/user/find/:email', (req, res) => {
-  const {
-    email
-  } = req.params;
-
+  const { email } = req.params;
   const user = users.find(user => user.email === email);
 
   if (user) {
     const len = user.password.length;
     const passwordHint = user.password.slice(0, 2) + '*'.repeat(len - 2);
+
     res.send({
-      passwordHint
+      passwordHint,
     });
   } else {
     return res.status(401).send({
@@ -130,18 +130,16 @@ app.get('/users/logout', (req, res) => {
   res.clearCookie('accessToken').sendStatus(204);
 });
 
-// post
 // 로그인
 app.post('/signin', (req, res) => {
-  const {
-    email,
-    password
-  } = req.body;
+  const { email, password } = req.body;
+
   if (!email || !password) {
     return res.status(401).send({
       error: '사용자 아이디 또는 패스워드가 전달되지 않았습니다.',
     });
   }
+
   const user = users.find(user => email === user.email && password === user.password);
 
   if (!user) {
@@ -150,7 +148,8 @@ app.post('/signin', (req, res) => {
     });
   }
 
-  const accessToken = jwt.sign({
+  const accessToken = jwt.sign(
+    {
       email,
     },
     process.env.JWT_SECRET_KEY,
@@ -164,7 +163,9 @@ app.post('/signin', (req, res) => {
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7d
     httpOnly: true,
   });
+
   const _id = user.id;
+
   res.send({
     _id,
   });
@@ -173,36 +174,28 @@ app.post('/signin', (req, res) => {
 // 회원가입
 app.post('/users/signup', (req, res) => {
   users = [req.body, ...users];
+
   res.send(users);
 });
 
-// patch
 // 마이페이지 수정
 app.patch('/users/:id', (req, res) => {
-  const {
-    id
-  } = req.params;
+  const { id } = req.params;
   const payload = req.body;
-  users = users.map(user => (user.id === +id ? {
-      ...user,
-      ...payload,
-    } :
-    user));
+
+  users = users.map(user => (user.id === +id ? { ...user, ...payload } : user));
   res.send(users);
 });
 
-// delete
 // 회원탈퇴
 app.delete('/users/:id', (req, res) => {
-  const {
-    id
-  } = req.params;
+  const { id } = req.params;
+
   users = users.filter(user => user.id !== +id);
 
   res.clearCookie('accessToken').sendStatus(204);
 });
 
-// 서버에서 계속 듣고있음
 app.listen(port, () => {
   console.log(`Server listening at http://localhost:${port}`);
 });
