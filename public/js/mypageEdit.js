@@ -11,16 +11,18 @@ let nowUserId;
 let nowUserPassword;
 
 window.onload = async () => {
-  const {
-    data: user
-  } = await axios.get('/checkAuth');
+  try {
+    const { data: user } = await axios.get('/checkAuth');
 
-  $email.value = user.email;
-  $name.value = user.name;
-  $phone.value = user.phone;
+    $email.value = user.email;
+    $name.value = user.name;
+    $phone.value = user.phone;
 
-  nowUserId = user.id;
-  nowUserPassword = user.password;
+    nowUserId = user.id;
+    nowUserPassword = user.password;
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 const INPUT_NAME_INDEX = 0;
@@ -38,11 +40,19 @@ document.querySelector('.mypage-form').oninput = e => {
 
     const check = $password.parentNode.lastElementChild.textContent === '';
     if ($confirmPwd.value !== '') {
-      validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), INPUT_CONFIRM_PASSWORD_INDEX, $completeButton);
+      validate.passwordConfirmValidate(
+        !(check && $password.value === $confirmPwd.value),
+        INPUT_CONFIRM_PASSWORD_INDEX,
+        $completeButton
+      );
     }
   } else if (e.target.matches('#confirm-password')) {
     const check = $password.parentNode.lastElementChild.textContent === '';
-    validate.passwordConfirmValidate(!(check && $password.value === $confirmPwd.value), INPUT_CONFIRM_PASSWORD_INDEX, $completeButton);
+    validate.passwordConfirmValidate(
+      !(check && $password.value === $confirmPwd.value),
+      INPUT_CONFIRM_PASSWORD_INDEX,
+      $completeButton
+    );
   }
 };
 
@@ -93,13 +103,18 @@ $deletePasswordCheck.oninput = () => {
 $modal.querySelector('form').onsubmit = async e => {
   e.preventDefault();
 
-  if (document.querySelector('.delete-button').getAttribute('disabled') || $deletePasswordCheck.value !== nowUserPassword) return;
+  if (
+    document.querySelector('.delete-button').getAttribute('disabled') ||
+    $deletePasswordCheck.value !== nowUserPassword
+  )
+    return;
 
-  const check = await axios.delete(`/users/${nowUserId}`);
-
-  if (check.status === 204) window.location.href = '/signin';
+  try {
+    const check = await axios.delete(`/users/${nowUserId}`);
+    if (check.status === 204) window.location.href = '/signin';
+  } catch (e) {
+    console.error(e);
+  }
 };
 
-document.querySelector('.form-back').onclick = () => {
-  window.location.href = '/mypage';
-};
+document.querySelector('.form-back').onclick = () => (window.location.href = '/mypage');
