@@ -1,4 +1,6 @@
+// import { hash } from 'bcrypt';
 import validate from './validate.js';
+// const bcrypt = require('bcrypt');
 
 const $completeButton = document.querySelector('.complete-button');
 const $email = document.querySelector('.mypage-form-email > input');
@@ -91,12 +93,25 @@ $modal.querySelector('.cancle-button').onclick = () => {
 
 const $deletePasswordCheck = $modal.querySelector('.delete-password');
 
-$deletePasswordCheck.oninput = () => {
-  if ($deletePasswordCheck.value === nowUserPassword) {
-    $modal.querySelector('.delete-button').removeAttribute('disabled');
-    $modalError.textContent = '버튼을 누르면 계정이 삭제됩니다.';
-  } else {
-    $modalError.textContent = '비밀번호가 일치하지 않습니다!';
+$deletePasswordCheck.oninput = async () => {
+  try {
+    const hashPassword = await axios.post('/hashPassword', {
+      password: $deletePasswordCheck.value,
+      compare: nowUserPassword,
+    });
+    console.log($deletePasswordCheck.value);
+    console.log(hashPassword.data, nowUserPassword);
+
+    // if ($deletePasswordCheck.value === nowUserPassword) {
+    // if (hashPassword.data === nowUserPassword) {
+    if (hashPassword) {
+      $modal.querySelector('.delete-button').removeAttribute('disabled');
+      $modalError.textContent = '버튼을 누르면 계정이 삭제됩니다.';
+    } else {
+      $modalError.textContent = '비밀번호가 일치하지 않습니다!';
+    }
+  } catch (e) {
+    console.error(e);
   }
 };
 
@@ -106,6 +121,7 @@ $modal.querySelector('form').onsubmit = async e => {
   if (
     document.querySelector('.delete-button').getAttribute('disabled') ||
     $deletePasswordCheck.value !== nowUserPassword
+    // bcrypt.hashSync($deletePasswordCheck.value, 10) !== nowUserPassword
   )
     return;
 

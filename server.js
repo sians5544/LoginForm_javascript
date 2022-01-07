@@ -41,7 +41,13 @@ let users = [
   },
 ];
 
+users = users.map(user => ({
+  ...user,
+  passwordHint: user.password.slice(0, 2) + '*'.repeat(user.password.length - 2),
+}));
+console.log(users);
 users = users.map(user => ({ ...user, password: bcrypt.hashSync(user.password, 10) }));
+console.log(users);
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -109,18 +115,31 @@ app.get('/users/email/:email', (req, res) => {
   });
 });
 
+// 회원탈퇴 비밀번호 검증
+app.post('/hashPassword', (req, res) => {
+  // const { password } = req.body;
+  // const hashPassword = bcrypt.hashSync(password, 10);
+  // res.send(hashPassword);
+  const check = bcrypt.hashSync(req.body.password, 10) === req.body.compare;
+  console.log(bcrypt.hashSync(req.body.password, 10), req.body.compare);
+  console.log(check);
+  res.send(check);
+});
+
 // 비밀번호 찾기
 app.get('/user/find/:email', (req, res) => {
   const { email } = req.params;
   const user = users.find(user => user.email === email);
 
   if (user) {
-    const len = user.password.length;
-    const passwordHint = user.password.slice(0, 2) + '*'.repeat(len - 2);
+    // const len = user.password.length;
+    // const passwordHint = user.password.slice(0, 2) + '*'.repeat(len - 2);
 
-    res.send({
-      passwordHint,
-    });
+    // res.send({
+    //   passwordHint,
+    // });
+    console.log(user);
+    res.send(user.passwordHint);
   } else {
     return res.status(401).send({
       error: '존재하지 않는 이메일 입니다.',
@@ -158,7 +177,7 @@ app.post('/signin', (req, res) => {
 
   // 자동로그인 check에 따른 expire 기간 설정
   if (autoLogin) {
-    accessToken = createToken(email, '30s');
+    accessToken = createToken(email, '1d');
   } else {
     accessToken = createToken(email, '10s');
   }
@@ -184,9 +203,9 @@ app.post('/users/signup', (req, res) => {
 
 // 마이페이지 수정
 app.patch('/users/:id', (req, res) => {
+  console.log(req.params);
   const { id } = req.params;
-  const payload = req.body;
-
+  const payload = { ...req.body, password: bcrypt.hashSync(req.body.password, 10) };
   users = users.map(user => (user.id === +id ? { ...user, ...payload } : user));
   res.send(users);
 });
