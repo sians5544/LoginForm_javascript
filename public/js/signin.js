@@ -80,3 +80,16 @@ $popupButton.onclick = async e => {
     document.querySelector('.popup .error').innerHTML = '존재하지 않는 이메일 입니다.';
   }
 };
+
+document.querySelector('.popup-form').onsubmit = async e => {
+  e.preventDefault();
+  try {
+    const findPassword = $findPassword.value;
+    const res = await axios.get(`/user/find/${findPassword}`);
+    $findPassword.value = res.data.passwordHint;
+    $findPassword.blur();
+  } catch (e) {
+    console.error(e);
+    document.querySelector('.popup .error').innerHTML = '존재하지 않는 이메일 입니다.';
+  }
+};
