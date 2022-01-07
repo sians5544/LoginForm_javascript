@@ -177,8 +177,8 @@ app.post('/signin', (req, res) => {
 
 // 회원가입
 app.post('/users/signup', (req, res) => {
-  users = [req.body, ...users];
-
+  users = [...users, { ...req.body, password: bcrypt.hashSync(req.body.password, 10) }];
+  console.log(users);
   res.send(users);
 });
 
