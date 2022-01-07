@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 require('dotenv').config();
 
@@ -39,6 +40,8 @@ let users = [
     password: 'gustj123',
   },
 ];
+
+users = users.map(user => ({ ...user, password: bcrypt.hashSync(user.password, 10) }));
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -140,7 +143,7 @@ app.post('/signin', (req, res) => {
     });
   }
 
-  const user = users.find(user => email === user.email && password === user.password);
+  const user = users.find(user => email === user.email && bcrypt.compareSync(password, user.password));
 
   if (!user) {
     return res.status(401).send({
