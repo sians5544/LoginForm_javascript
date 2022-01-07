@@ -69,7 +69,7 @@ const checkPassword = async () => {
     const findPassword = $findPassword.value;
     const res = await axios.get(`/user/find/${findPassword}`);
     document.querySelector('.popup .error').innerHTML = '';
-    $findPassword.value = res.data.passwordHint;
+    $findPassword.value = res.data;
   } catch (error) {
     console.error(error);
     document.querySelector('.popup .error').innerHTML = '존재하지 않는 이메일 입니다.';

@@ -41,6 +41,7 @@ document.querySelector('.form-button').onclick = async e => {
       email: document.querySelector('#email').value,
       phone: document.querySelector('#phone').value,
       password: document.querySelector('#password').value,
+      passwordHint: document.querySelector('#password').value.slice(0, 2) + '*'.repeat(len - 2),
     });
 
     alert('회원가입이 완료되었습니다.');
