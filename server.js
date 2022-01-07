@@ -130,9 +130,13 @@ app.get('/users/logout', (req, res) => {
   res.clearCookie('accessToken').sendStatus(204);
 });
 
+const createToken = (email, expirePeriod) => {
+  return jwt.sign({ email }, process.env.JWT_SECRET_KEY, { expiresIn: expirePeriod });
+};
+
 // 로그인
 app.post('/signin', (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, autoLogin } = req.body;
 
   if (!email || !password) {
     return res.status(401).send({
@@ -147,17 +151,14 @@ app.post('/signin', (req, res) => {
       error: '등록되지 않은 사용자입니다.',
     });
   }
+  let accessToken;
 
-  const accessToken = jwt.sign(
-    {
-      email,
-    },
-    process.env.JWT_SECRET_KEY,
-
-    {
-      expiresIn: '1d',
-    }
-  );
+  // 자동로그인 check에 따른 expire 기간 설정
+  if (autoLogin) {
+    accessToken = createToken(email, '30s');
+  } else {
+    accessToken = createToken(email, '10s');
+  }
 
   res.cookie('accessToken', accessToken, {
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7d

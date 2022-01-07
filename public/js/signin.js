@@ -13,10 +13,10 @@ document.querySelector('.signin-form').oninput = e => {
   }
 };
 
-// let checked = false;
-// document.querySelector('#auto__login').onchange = () => {
-//   checked = !checked;
-// };
+let checked = false;
+document.querySelector('#auto__login').onchange = () => {
+  checked = !checked;
+};
 
 $formButton.onclick = async e => {
   e.preventDefault();
@@ -25,6 +25,7 @@ $formButton.onclick = async e => {
     const { data: user } = await axios.post('/signin', {
       email: document.querySelector('#email').value,
       password: document.querySelector('#password').value,
+      autoLogin: checked,
     });
 
     if (user) window.location.href = '/mypage';
@@ -75,7 +76,6 @@ const checkPassword = async () => {
   }
 };
 
-// 밑에 두개 이벤트 중복처리 생각해보기
 document.querySelector('.popup-button').onclick = async e => {
   e.preventDefault();
   await checkPassword();
