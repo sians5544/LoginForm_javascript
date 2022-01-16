@@ -54,7 +54,6 @@ $modal.querySelector('.cancle-button').onclick = () => {
   popupHandle();
 };
 
-// validate.js에서 함수로 빼는거 생각해보기
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 $findPassword.oninput = e => {
   if (regEmail.test(e.target.value)) {
