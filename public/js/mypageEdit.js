@@ -10,7 +10,7 @@ const $password = document.querySelector('.mypage-form-password > input');
 const $confirmPwd = document.querySelector('#confirm-password');
 
 let nowUserId;
-let nowUserPassword;
+// let nowUserPassword;
 
 window.onload = async () => {
   try {
@@ -21,7 +21,7 @@ window.onload = async () => {
     $phone.value = user.phone;
 
     nowUserId = user.id;
-    nowUserPassword = user.password;
+    // nowUserPassword = user.password;
   } catch (e) {
     console.error(e);
   }
@@ -87,48 +87,25 @@ const popupHandle = () => {
 document.querySelector('.withdraw-button').onclick = () => {
   popupHandle();
 };
-$modal.querySelector('.cancle-button').onclick = () => {
+
+document.querySelector('.cancle-button').onclick = () => {
   popupHandle();
 };
 
-const $deletePasswordCheck = $modal.querySelector('.delete-password');
-
-$deletePasswordCheck.oninput = async () => {
-  try {
-    const hashPassword = await axios.post('/hashPassword', {
-      password: $deletePasswordCheck.value,
-      compare: nowUserPassword,
-    });
-    console.log($deletePasswordCheck.value);
-    console.log(hashPassword.data, nowUserPassword);
-
-    // if ($deletePasswordCheck.value === nowUserPassword) {
-    // if (hashPassword.data === nowUserPassword) {
-    if (hashPassword) {
-      $modal.querySelector('.delete-button').removeAttribute('disabled');
-      $modalError.textContent = '버튼을 누르면 계정이 삭제됩니다.';
-    } else {
-      $modalError.textContent = '비밀번호가 일치하지 않습니다!';
-    }
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-$modal.querySelector('form').onsubmit = async e => {
+document.querySelector('form').onsubmit = async e => {
   e.preventDefault();
 
-  if (
-    document.querySelector('.delete-button').getAttribute('disabled') ||
-    $deletePasswordCheck.value !== nowUserPassword
-    // bcrypt.hashSync($deletePasswordCheck.value, 10) !== nowUserPassword
-  )
-    return;
-
   try {
-    const check = await axios.delete(`/users/${nowUserId}`);
-    alert('계정이 정상적으로 삭제되었습니다.');
-    if (check.status === 204) window.location.href = '/signin';
+    const check = await axios.post(`/users/${nowUserId}`, {
+      checkPassword: document.querySelector('.delete-password').value,
+    });
+
+    if (check.status === 204) {
+      alert('계정이 정상적으로 삭제되었습니다.');
+      window.location.href = '/signin';
+    } else if (check.status === 202) {
+      alert('비밀번호가 일치하지 않습니다.');
+    }
   } catch (e) {
     console.error(e);
   }

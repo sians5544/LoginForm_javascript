@@ -33,6 +33,13 @@ let users = [
     password: 'whdqls123',
   },
   {
+    id: 5,
+    name: '원종빈',
+    email: '1@naver.com',
+    phone: '010-1234-8765',
+    password: '123123',
+  },
+  {
     id: 4,
     name: '안현서',
     email: '1410ahs@naver.com',
@@ -41,13 +48,12 @@ let users = [
   },
 ];
 
+// 기존 유저 password hint 추가 및 비밀번호 암호화
 users = users.map(user => ({
   ...user,
+  password: bcrypt.hashSync(user.password, 10),
   passwordHint: user.password.slice(0, 2) + '*'.repeat(user.password.length - 2),
 }));
-console.log(users);
-users = users.map(user => ({ ...user, password: bcrypt.hashSync(user.password, 10) }));
-console.log(users);
 
 app.use(express.static('public'));
 app.use(express.json());
@@ -58,9 +64,11 @@ const auth = (req, res, next) => {
   const accessToken = req.headers.authorization || req.cookies.accessToken;
 
   try {
-    jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
-    next();
+    const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
+    console.log(decoded);
+    if (users.find(user => user.email === decoded.email)) next();
   } catch (e) {
+    console.error(e);
     return res.redirect('/signin');
   }
 };
@@ -71,7 +79,6 @@ app.get('/checkAuth', (req, res) => {
 
   try {
     const decoded = jwt.verify(accessToken, process.env.JWT_SECRET_KEY);
-
     res.send(users.find(user => user.email === decoded.email));
   } catch (e) {
     return res.redirect('/signin');
@@ -115,30 +122,12 @@ app.get('/users/email/:email', (req, res) => {
   });
 });
 
-// 회원탈퇴 비밀번호 검증
-app.post('/hashPassword', (req, res) => {
-  // const { password } = req.body;
-  // const hashPassword = bcrypt.hashSync(password, 10);
-  // res.send(hashPassword);
-  const check = bcrypt.hashSync(req.body.password, 10) === req.body.compare;
-  console.log(bcrypt.hashSync(req.body.password, 10), req.body.compare);
-  console.log(check);
-  res.send(check);
-});
-
 // 비밀번호 찾기
 app.get('/user/find/:email', (req, res) => {
   const { email } = req.params;
   const user = users.find(user => user.email === email);
 
   if (user) {
-    // const len = user.password.length;
-    // const passwordHint = user.password.slice(0, 2) + '*'.repeat(len - 2);
-
-    // res.send({
-    //   passwordHint,
-    // });
-    console.log(user);
     res.send(user.passwordHint);
   } else {
     return res.status(401).send({
@@ -177,9 +166,9 @@ app.post('/signin', (req, res) => {
 
   // 자동로그인 check에 따른 expire 기간 설정
   if (autoLogin) {
-    accessToken = createToken(email, '1d');
+    accessToken = createToken(email, '7d');
   } else {
-    accessToken = createToken(email, '10s');
+    accessToken = createToken(email, '1d');
   }
 
   res.cookie('accessToken', accessToken, {
@@ -187,36 +176,46 @@ app.post('/signin', (req, res) => {
     httpOnly: true,
   });
 
-  const _id = user.id;
-
-  res.send({
-    _id,
-  });
+  res.send(`${user.id}`);
 });
 
 // 회원가입
 app.post('/users/signup', (req, res) => {
   users = [...users, { ...req.body, password: bcrypt.hashSync(req.body.password, 10) }];
-  console.log(users);
   res.send(users);
 });
 
 // 마이페이지 수정
 app.patch('/users/:id', (req, res) => {
-  console.log(req.params);
   const { id } = req.params;
-  const payload = { ...req.body, password: bcrypt.hashSync(req.body.password, 10) };
-  users = users.map(user => (user.id === +id ? { ...user, ...payload } : user));
+  const { password } = req.body;
+
+  users = users.map(user =>
+    user.id === +id
+      ? {
+          ...user,
+          ...req.body,
+          password: bcrypt.hashSync(password, 10),
+          passwordHint: password.slice(0, 2) + '*'.repeat(password.length - 2),
+        }
+      : user
+  );
+
   res.send(users);
 });
 
 // 회원탈퇴
-app.delete('/users/:id', (req, res) => {
+app.post('/users/:id', (req, res) => {
   const { id } = req.params;
 
-  users = users.filter(user => user.id !== +id);
+  const user = users.find(user => user.id === +id);
 
-  res.clearCookie('accessToken').sendStatus(204);
+  if (bcrypt.compareSync(req.body.checkPassword, user.password)) {
+    users = users.filter(user => user.id !== +id);
+    res.clearCookie('accessToken').sendStatus(204);
+  } else {
+    res.sendStatus(202);
+  }
 });
 
 app.listen(port, () => {
