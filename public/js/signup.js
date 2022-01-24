@@ -11,9 +11,11 @@ document.querySelector('.signup-form').oninput = e => {
   if (e.target.matches('#name')) {
     validate.nameValidate(e.target.value, 0, $signupButton);
   } else if (e.target.matches('#email')) {
-    validate.emailValidate(e.target.value, 1, $signupButton);
+    validate.emailValidate(e.target.value, 1, $signupButton, false);
+
     $emailInput.querySelector('.icon-success').classList.add('hidden');
     $emailInput.querySelector('.icon-error').classList.remove('hidden');
+
     if (regEmail.test(e.target.value)) {
       $duplicateButton.removeAttribute('disabled');
     } else {
@@ -23,6 +25,11 @@ document.querySelector('.signup-form').oninput = e => {
     validate.phoneValidate(e.target.value, 2, $signupButton);
   } else if (e.target.matches('#password')) {
     validate.passwordValidate(e.target.value, 3, $signupButton);
+    validate.passwordConfirmValidate(
+      e.target.value !== document.querySelector('#confirm-password').value,
+      4,
+      $signupButton
+    );
   } else if (e.target.matches('#confirm-password')) {
     validate.passwordConfirmValidate(document.querySelector('#password').value !== e.target.value, 4, $signupButton);
   }
@@ -43,7 +50,9 @@ document.querySelector('.form-button').onclick = async e => {
       email: document.querySelector('#email').value,
       phone: document.querySelector('#phone').value,
       password: document.querySelector('#password').value,
-      passwordHint: document.querySelector('#password').value.slice(0, 2) + '*'.repeat(len - 2),
+      passwordHint:
+        document.querySelector('#password').value.slice(0, 2) +
+        '*'.repeat(document.querySelector('#password').value.length - 2),
     });
 
     alert('회원가입이 완료되었습니다.');
@@ -71,9 +80,9 @@ $duplicateButton.onclick = async () => {
       changeText('이미 존재하는 이메일 입니다.', '#ed2553');
     } else {
       changeText('사용 가능한 이메일 입니다.', '#2196f3');
-
       $emailInput.querySelector('.icon-error').classList.add('hidden');
       $emailInput.querySelector('.icon-success').classList.remove('hidden');
+      validate.emailValidate(emailValue, 1, $signupButton);
     }
   } catch (error) {
     console.error(error);

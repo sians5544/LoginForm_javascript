@@ -89,6 +89,10 @@ app.get('/signin', (req, res) => {
   res.sendFile(path.join(__dirname, './public/signin.html'));
 });
 
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/signup.html'));
+});
+
 // 미들웨어 auth를 사용해 로그인 여부를 체크
 app.get('/', auth, (req, res) => {
   res.sendFile(path.join(__dirname, './public/mypage.html'));

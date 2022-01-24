@@ -13,9 +13,9 @@ const iconChange = (index, isError) => {
 };
 
 const countCorrectInput = (arr, index, btn) => {
-  const cnt = arr.filter(idx => (idx !== index ? !$iconSuccess[idx].classList.contains('hidden') : false)).length;
+  const cnt = arr.filter(idx => !$iconSuccess[idx].classList.contains('hidden')).length;
 
-  if (cnt === arr.length - 1) btn.removeAttribute('disabled');
+  if (cnt === arr.length) btn.removeAttribute('disabled');
 };
 
 const activeSubmitButton = (reg, index, btn) => {
@@ -29,18 +29,19 @@ const activeSubmitButton = (reg, index, btn) => {
   }
 };
 
-const checkIsCorrectForm = (reg, index, msg, btn) => {
-  iconChange(index, reg);
+const checkIsCorrectForm = (reg, index, msg, btn, beforeCheck = true) => {
+  if (beforeCheck) iconChange(index, reg);
+
   $error[index].textContent = reg ? msg : '';
   $error[index].style.color = '#ed2553';
   activeSubmitButton(reg, index, btn);
 };
 
 export default {
-  emailValidate(value, index, button) {
+  emailValidate(value, index, button, beforeCheck) {
     const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 
-    return checkIsCorrectForm(!regEmail.test(value), index, '이메일 형식에 맞게 입력해 주세요.', button);
+    return checkIsCorrectForm(!regEmail.test(value), index, '이메일 형식에 맞게 입력해 주세요.', button, beforeCheck);
   },
 
   nameValidate(value, index, button) {
