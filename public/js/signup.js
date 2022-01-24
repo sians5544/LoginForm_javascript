@@ -11,7 +11,7 @@ document.querySelector('.signup-form').oninput = e => {
   if (e.target.matches('#name')) {
     validate.nameValidate(e.target.value, 0, $signupButton);
   } else if (e.target.matches('#email')) {
-    validate.emailValidate(e.target.value, 1, $signupButton);
+    validate.emailValidate(e.target.value, 1, $signupButton, false);
 
     $emailInput.querySelector('.icon-success').classList.add('hidden');
     $emailInput.querySelector('.icon-error').classList.remove('hidden');
