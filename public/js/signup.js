@@ -42,6 +42,8 @@ document.querySelector('.form-button').onclick = async e => {
     const { data: maxId } = await axios.get('/users');
     const newId = maxId.maxId;
 
+    const len = document.querySelector('#password').value.length;
+
     await axios.post('/users/signup', {
       id: newId,
       name: document.querySelector('#name').value,
