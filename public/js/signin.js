@@ -54,6 +54,12 @@ $modal.querySelector('.cancle-button').onclick = () => {
   popupHandle();
 };
 
+document.querySelector('.signin-form-more').onclick = e => {
+  if (!e.target.matches('a')) return;
+
+  window.location.href = '/signup';
+};
+
 const regEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 $findPassword.oninput = e => {
   if (regEmail.test(e.target.value)) {

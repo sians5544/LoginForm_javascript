@@ -6,16 +6,16 @@ const iconChange = (index, isError) => {
   if (isError) {
     $iconSuccess[index].classList.add('hidden');
     $iconError[index].classList.remove('hidden');
-  } else {
+  } else if (index !== 1) {
     $iconSuccess[index].classList.remove('hidden');
     $iconError[index].classList.add('hidden');
   }
 };
 
 const countCorrectInput = (arr, index, btn) => {
-  const cnt = arr.filter(idx => (idx !== index ? !$iconSuccess[idx].classList.contains('hidden') : false)).length;
+  const cnt = arr.filter(idx => !$iconSuccess[idx].classList.contains('hidden')).length;
 
-  if (cnt === arr.length - 1) btn.removeAttribute('disabled');
+  if (cnt === arr.length) btn.removeAttribute('disabled');
 };
 
 const activeSubmitButton = (reg, index, btn) => {
